@@ -39,10 +39,11 @@ def home():
 def scrape():
     #flash(request.args.get('url'), 'success')
     url = request.args.get('url')
-    
+    code = request.args.get('code')
     try:    
         response = requests.get(url)
         content = BeautifulSoup(response.text, 'lxml').prettify()
+        
     except:
         flash('Failed to retrieve URL "%s"' % url, 'danger')
         content = ''
