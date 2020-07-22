@@ -3,6 +3,31 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <!-- This is to have a loader-->
+  <style>
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+    }
+    
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    </style>
+
 </head>
 <body>
   <div class="container">
@@ -27,9 +52,7 @@
 
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
-    <h3>URL</h3>
-    
-    
+    <h3>URL</h3>  
       <div class="row">
         <div class="col">
           <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -46,8 +69,7 @@
   
   </div>
   <div id="menu1" class="tab-pane fade">
-    <h3>CODE</h3>
-    
+    <h3>CODE</h3> 
       <div class="row">
         <div class="col">
           <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -55,8 +77,9 @@
               <form class="form-inline mt-2 mt-md-0 mx-auto" action="/scrape">
                 <input class="form-control mr-sm-2" type="text" placeholder="Paste a Code to test." name="url" style="height:110px;width:800px;"> 
                 <br>           
-                <button class="btn btn-primary my-2 my-sm-0" type="submit">Test Code</button>
+                <button class="btn btn-primary my-2 my-sm-0" onclick="$('#loading').show();" type="submit">Test Code</button>
               </form>
+              <div class="loader" id="loading" style="display:none;"><img src="loading.gif" alt="" /></div>
             </div>
           </nav>
         </div>
