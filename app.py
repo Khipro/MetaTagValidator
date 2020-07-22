@@ -35,20 +35,43 @@ app.secret_key = "VERISIKRITKEY"
 def home():
     return render_template('home.html')
 
+from urllib.parse import urlparse
+import re
 @app.route('/scrape')
 def scrape():
     #flash(request.args.get('url'), 'success')
-    url = request.args.get('url')
-    code = request.args.get('code')
-    try:    
-        response = requests.get(url)
-        content = BeautifulSoup(response.text, 'lxml').prettify()
-        
-    except:
-        flash('Failed to retrieve URL "%s"' % url, 'danger')
-        content = ''
+    #url = request.args.get('url')
+    code = request.args.get('url')
+    #print("Code:", code)
+    regex = re.compile(
+        r'^(?:http|ftp)s?://' # http:// or https://
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
+        r'localhost|' #localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})' # ...or ip
+        r'(?::\d+)?' # optional port
+        r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+    
+    urlValidator = re.match(regex, code) is not None
+    if code == "":
+        flash('Failed to retrieve "%s"' % code, 'danger')
+    if not urlValidator:
+        content = BeautifulSoup(code,'html.parser').prettify()
+    else:
+        content = requests.get(code)
+        content = BeautifulSoup(content.text, 'html.parser').prettify()
 
     return render_template('scrape.html', content=content)
+    #try:    
+      #  response = requests.get(url)
+      #  content = BeautifulSoup(response.text, 'lxml').prettify()
+       # content2 = BeautifulSoup(code, 'lxml').prettify()
+        
+    #except:
+      #  flash('Failed to retrieve URL "%s"' % url, 'danger')
+       # content = ''
+
+   # return render_template('scrape.html', content=content)
+
 
 # render results to screen
 @app.route('/results')
