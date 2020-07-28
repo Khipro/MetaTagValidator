@@ -74,10 +74,13 @@ def scrape():
     service = content.find('meta', {'property':'dcterms:service'})
     accessrights = content.find('meta', {'property':'dcterms:accessRights'})
     adobescript = content.find('script', {'src':'https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
+
+    adobe = content.find_all('script',{"type":"text/javascript"})
+    x = len(adobe)-1
+    adobeendtag = (adobe[x])
+
     
-
-
-    return render_template('scrape.html', content=content, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=dateissued,datemodified=datemodified, creator = creator, subject= subject, language=language, urlcanonical=urlcanonical)
+    return render_template('scrape.html', content=content, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=dateissued,datemodified=datemodified, creator = creator, subject= subject, language=language, urlcanonical=urlcanonical, service = service , accessrights =  accessrights, adobescript = adobescript, adobeendtag= adobeendtag)
 
 
     #try:       
