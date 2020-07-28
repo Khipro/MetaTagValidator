@@ -12,6 +12,8 @@ from flask import flash
 from flask import redirect
 from flask import url_for
 import requests
+from urllib.parse import urlparse
+import re
 from bs4 import BeautifulSoup
 import json
 
@@ -35,8 +37,7 @@ app.secret_key = "VERISIKRITKEY"
 def home():
     return render_template('home.html')
 
-from urllib.parse import urlparse
-import re
+
 @app.route('/scrape')
 def scrape():
     #flash(request.args.get('url'), 'success')
@@ -55,13 +56,31 @@ def scrape():
     if code == "":
         flash('Failed to retrieve "%s"' % code, 'danger')
     if not urlValidator:
-        content = BeautifulSoup(code,'html.parser').prettify()
+        content = BeautifulSoup(code,'lxml')
     else:
         content = requests.get(code)
-        content = BeautifulSoup(content.text, 'html.parser').prettify()
+        content = BeautifulSoup(content.text, 'lxml')
+    meta = content.find("meta", charset="utf-8")
+    title = content.find("title")
+    description = content.find('meta', {'name':'description'})
+    keywords = content.find('meta', {'name':'keywords'})
+    title2 = content.find('meta', {'name':'dcterms.title'})
+    dateissued = content.find('meta', {'name':'dcterms.issued'})
+    datemodified = content.find('meta', {'name':'dcterms.modified'})
+    creator = content.find('meta', {'name':'dcterms.creator'})
+    subject = content.find('meta', {'name':'dcterms.subject'})
+    language = content.find('meta', {'name':'dcterms.language'})
+    urlcanonical = content.find('link', {'rel':'canonical'})
+    service = content.find('meta', {'property':'dcterms:service'})
+    accessrights = content.find('meta', {'property':'dcterms:accessRights'})
+    adobescript = content.find('script', {'src':'https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
+    
 
-    return render_template('scrape.html', content=content)
-    #try:    
+
+    return render_template('scrape.html', content=content, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=dateissued,datemodified=datemodified, creator = creator, subject= subject, language=language, urlcanonical=urlcanonical)
+
+
+    #try:       
       #  response = requests.get(url)
       #  content = BeautifulSoup(response.text, 'lxml').prettify()
        # content2 = BeautifulSoup(code, 'lxml').prettify()
@@ -110,7 +129,6 @@ def results():
         results.append(row)
     
     return render_template('results.html', results=results)
-
 
 
 
