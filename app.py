@@ -57,30 +57,46 @@ def scrape():
         flash('Failed to retrieve "%s"' % code, 'danger')
     if not urlValidator:
         content = BeautifulSoup(code,'lxml')
+        count = 1
+        
     else:
         content = requests.get(code)
         content = BeautifulSoup(content.text, 'lxml')
+        
+
     meta = content.find("meta", charset="utf-8")
     title = content.find("title")
     description = content.find('meta', {'name':'description'})
     keywords = content.find('meta', {'name':'keywords'})
     title2 = content.find('meta', {'name':'dcterms.title'})
-    dateissued = content.find('meta', {'name':'dcterms.issued'})
-    datemodified = content.find('meta', {'name':'dcterms.modified'})
+    date_issued = content.find('meta', {'name':'dcterms.issued'})
+    date_modified = content.find('meta', {'name':'dcterms.modified'})
     creator = content.find('meta', {'name':'dcterms.creator'})
     subject = content.find('meta', {'name':'dcterms.subject'})
     language = content.find('meta', {'name':'dcterms.language'})
-    urlcanonical = content.find('link', {'rel':'canonical'})
+    url_canonical = content.find('link', {'rel':'canonical'})
     service = content.find('meta', {'property':'dcterms:service'})
-    accessrights = content.find('meta', {'property':'dcterms:accessRights'})
-    adobescript = content.find('script', {'src':'https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
+    access_rights = content.find('meta', {'property':'dcterms:accessRights'})
+    adobe_script = content.find('script', {'src':'https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
 
     adobe = content.find_all('script',{"type":"text/javascript"})
-    x = len(adobe)-1
-    adobeendtag = (adobe[x])
-
+    if adobe == [] or adobe == None:
+        adobe_end_tag = "None"
+        print(adobe_end_tag)
+    elif adobe !=0: 
+        x = len(adobe)-1
+        adobe_end_tag = (adobe[x])
+        adobe_original ="""<script type="text/javascript">_satellite.pageBottom();</script>"""
+        if str(adobe_end_tag) == adobe_original:
+            print(adobe_end_tag)
+        else:
+            adobe_end_tag = "None"
+            print(adobe_end_tag)
+    else:
+        adobeendtag = "None"
+        print(adobe_end_tag)
     
-    return render_template('scrape.html', content=content, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=dateissued,datemodified=datemodified, creator = creator, subject= subject, language=language, urlcanonical=urlcanonical, service = service , accessrights =  accessrights, adobescript = adobescript, adobeendtag= adobeendtag)
+    return render_template('scrape.html', content=content, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_script, adobeendtag= adobe_end_tag)
 
 
     #try:       
