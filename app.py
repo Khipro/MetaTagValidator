@@ -56,13 +56,15 @@ def scrape():
     if code == "":
         flash('Failed to retrieve "%s"' % code, 'danger')
     if not urlValidator:
+        content1 = BeautifulSoup(code,'lxml').prettify()
         content = BeautifulSoup(code,'lxml')
-        count = 1
-        
+
+
     else:
+        content1 = requests.get(code)
+        content1 = BeautifulSoup(content1.text, 'html5lib').prettify()
         content = requests.get(code)
         content = BeautifulSoup(content.text, 'lxml')
-        
 
     meta = content.find("meta", charset="utf-8")
     title = content.find("title")
@@ -77,8 +79,28 @@ def scrape():
     url_canonical = content.find('link', {'rel':'canonical'})
     service = content.find('meta', {'property':'dcterms:service'})
     access_rights = content.find('meta', {'property':'dcterms:accessRights'})
+    
+    #Finding the 3rd Adobe tag and validating
+    #Both with and without https scraped and validated
     adobe_script = content.find('script', {'src':'https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
+    adobe_original1= """<script src="https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js"></script>"""
+    adobe_original2="""<script src="//assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js"></script>"""
+    if  str(adobe_script) == adobe_original1:
+        adobe_third = adobe_script
+        print(adobe_third)   
+    elif adobe_script == None:
+        adobe_script2= content.find('script', {'src':'//assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
+        if str(adobe_script2) == adobe_original2:
+            adobe_third = adobe_script2
+            print(adobe_third)
+        else:
+            print("None2")
+    else:
+        print("None1")
 
+
+    #Validate the end location of the Adove tag
+    #Validate if it is maghing the exact tag
     adobe = content.find_all('script',{"type":"text/javascript"})
     if adobe == [] or adobe == None:
         adobe_end_tag = "None"
@@ -96,7 +118,7 @@ def scrape():
         adobeendtag = "None"
         print(adobe_end_tag)
     
-    return render_template('scrape.html', content=content, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_script, adobeendtag= adobe_end_tag)
+    return render_template('scrape.html', content=content1, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
 
 
     #try:       
