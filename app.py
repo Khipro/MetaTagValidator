@@ -16,6 +16,7 @@ from urllib.parse import urlparse
 import re
 from bs4 import BeautifulSoup
 import json
+from bs4.formatter import XMLFormatter
 
 
 ######################################################
@@ -37,6 +38,20 @@ app.secret_key = "VERISIKRITKEY"
 def home():
     return render_template('home.html')
 
+#Create custom odering of the tags
+#Beautiful soup parser auto sorts elements within tags alpabetically
+class SortAttributes(XMLFormatter):
+    def attributes(self, tag):
+        """Reorder a tag's attributes however you want."""
+        attrib_order = ['name','title','property', 'content']
+        new_order = []
+        for element in attrib_order:
+            if element in tag.attrs:
+                new_order.append((element, tag[element]))
+        for pair in tag.attrs.items():
+            if pair not in new_order:
+                new_order.append(pair)
+        return new_order
 
 @app.route('/scrape')
 def scrape():
@@ -62,7 +77,7 @@ def scrape():
 
     else:
         content1 = requests.get(code)
-        content1 = BeautifulSoup(content1.text, 'html5lib').prettify()
+        content1 = BeautifulSoup(content1.text, 'html.parser')
         content = requests.get(code)
         content = BeautifulSoup(content.text, 'lxml')
 
@@ -123,7 +138,14 @@ def scrape():
     else:
         adobeendtag = "None"
         print(adobe_end_tag)
-    
+
+    #code to reformat
+    xml_string = str(access_rights)
+    soup = BeautifulSoup(xml_string, 'html.parser')
+    bite_remove=soup.encode(formatter=SortAttributes())
+    print(bite_remove.decode('utf8'))
+
+
     return render_template('scrape.html', content=content1, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
 
 
