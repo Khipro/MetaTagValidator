@@ -78,7 +78,11 @@ def scrape():
     language = content.find('meta', {'name':'dcterms.language'})
     url_canonical = content.find('link', {'rel':'canonical'})
     service = content.find('meta', {'property':'dcterms:service'})
+
+    #Searching 2nd Adobe tag
+    #validating it.
     access_rights = content.find('meta', {'property':'dcterms:accessRights'})
+    
     
     #Finding the 3rd Adobe tag and validating
     #Both with and without https scraped and validated
@@ -94,9 +98,11 @@ def scrape():
             adobe_third = adobe_script2
             print(adobe_third)
         else:
-            print("None2")
+            adobe_third = "None"
+            print(adobe_third)
     else:
-        print("None1")
+        adobe_third = "None"
+        print(adobe_third)
 
 
     #Validate the end location of the Adove tag
