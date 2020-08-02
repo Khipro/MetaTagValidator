@@ -11,6 +11,7 @@ from flask import render_template
 from flask import flash
 from flask import redirect
 from flask import url_for
+from datetime import datetime
 import requests
 from urllib.parse import urlparse
 import re
@@ -53,6 +54,15 @@ class SortAttributes(XMLFormatter):
                 new_order.append(pair)
         return new_order
 
+#Date formating validation
+def validate(date_text):
+    try:
+        if date_text != datetime.strptime(date_text, "%Y-%m-%d").strftime('%Y-%m-%d'):
+            raise ValueError
+        return True
+    except ValueError:
+        return False
+
 @app.route('/scrape')
 def scrape():
     
@@ -87,21 +97,119 @@ def scrape():
         content = requests.get(code)
         content = BeautifulSoup(content.text, 'lxml')
 
-    meta = content.find("meta", charset="utf-8")
-    title = content.find("title")
-    description = content.find('meta', {'name':'description'})
-    keywords = content.find('meta', {'name':'keywords'})
-    title2 = content.find('meta', {'name':'dcterms.title'})
-    date_issued = content.find('meta', {'name':'dcterms.issued'})
-    date_modified = content.find('meta', {'name':'dcterms.modified'})
-    creator = content.find('meta', {'name':'dcterms.creator'})
-
-    #search for dcterms.subjects
+    # Search and add line number to charset
+    meta_pre = content.find("meta", charset="utf-8")
+    meta_bite_remove=meta_pre.encode(formatter=SortAttributes())
+    meta_bite_remove = meta_bite_remove.decode('utf8')
+    for tag in content1.find_all("meta", charset="utf-8"):
+        meta = str(tag.sourceline)+". "+str(meta_bite_remove)
+        print(meta)
     
+    # Search and add line number to title
+    title_pre = content.find("title")
+    title_bite_remove=title_pre.encode(formatter=SortAttributes())
+    title_bite_remove = title_bite_remove.decode('utf8')
+    for tag in content1.find_all("title"):
+        title = str(tag.sourceline)+". "+str(title_bite_remove)
+        print(title)
+        
+    # Search description and custom format
+    description_pre = content.find('meta', {'name':'description'})
+    description_bite_remove=description_pre.encode(formatter=SortAttributes())
+    description_bite_remove = description_bite_remove.decode('utf8')
+    for tag in content1.find_all('meta', {'name':'description'}):
+        description = str(tag.sourceline)+". "+str(description_bite_remove)
+        print(description)
+    
+    # Search keywords
+    keywords_pre = content.find('meta', {'name':'keywords'})
+    keywords_bite_remove=keywords_pre.encode(formatter=SortAttributes())
+    keywords_bite_remove = keywords_bite_remove.decode('utf8')
+    for tag in content1.find_all('meta', {'name':'keywords'}):
+        keywords = str(tag.sourceline)+". "+str(keywords_bite_remove)
+        print(keywords)
+
+    # Search scterms creator
+    creator_pre = content.find('meta', {'name':'dcterms.creator'})
+    creator_bite_remove=creator_pre.encode(formatter=SortAttributes())
+    creator_bite_remove = creator_bite_remove.decode('utf8')
+    creator_original_eng = """<meta name="dcterms.creator" content="Government of Canada, Statistics Canada"/>"""
+    creator_original_fra = """<meta name="dcterms.creator" content="Gouvernement du Canada, Statistique Canada"/>"""
+    for tag in content1.find_all('meta', {'name':'dcterms.creator'}):    
+        if lang == "English":
+            if str(creator_bite_remove) == creator_original_eng:
+                creator = str(tag.sourceline)+". "+str(creator_bite_remove)
+                print(creator)
+            else:
+                creator = "None"
+                print(creator)
+        elif lang == "French":
+            if str(creator_bite_remove) == creator_original_fra:
+                creator = str(tag.sourceline)+". "+str(creator_bite_remove)
+                print(creator)
+            else:
+                creator = "None"
+                print(creator)
+        else:
+            creator = "None"
+            print(creator)
+    
+    # Searching the dcterms.title
+    title2_pre = content.find('meta', {'name':'dcterms.title'})
+    title2_bite_remove=title2_pre.encode(formatter=SortAttributes())
+    title2_bite_remove = title2_bite_remove.decode('utf8')
+    for tag in content1.find_all('meta', {'name':'dcterms.title'}):
+        title2 = str(tag.sourceline)+". "+str(title2_bite_remove)
+        print(title2)
+    
+    
+    # Finding date issued
+    # Formatting it
+    # Checking the date formatting
+    date_issued_pre = content.find('meta', {'name':'dcterms.issued'})
+    date_issued_bite_remove=date_issued_pre.encode(formatter=SortAttributes())
+    date_issued_bite_remove = date_issued_bite_remove.decode('utf8')
+
+    date_issued_string =str(date_issued_bite_remove)
+    finding_date = BeautifulSoup(date_issued_string,'lxml').meta.attrs['content']
+
+
+    validating_date_issued = validate(finding_date)
+    if validating_date_issued == True:
+        for tag in content1.find_all('meta', {'name':'dcterms.issued'}):
+            date_issued = str(tag.sourceline)+". "+str(date_issued_bite_remove)
+            print(date_issued)
+    else:
+        date_issued ="Date formatting issue"
+        print(date_issued)
+    
+    # Finding the date modified
+    # Formatting it
+    # Checking the date formating    
+    
+    date_modified_pre = content.find('meta', {'name':'dcterms.modified'})
+    date_modified_bite_remove=date_modified_pre.encode(formatter=SortAttributes())
+    date_modified_bite_remove = date_modified_bite_remove.decode('utf8')
+
+    date_modified_string =str(date_modified_bite_remove)
+    finding_date = BeautifulSoup(date_modified_string,'lxml').meta.attrs['content']
+
+
+    validating_date = validate(finding_date)
+    if validating_date == True:
+        for tag in content1.find_all('meta', {'name':'dcterms.modified'}):
+            date_modified = str(tag.sourceline)+". "+str(date_modified_bite_remove)
+            print(date_modified)
+    else:
+        date_modified ="Date formatting issue"
+        print(date_modified)
+
+    # Search for dcterms.subjects
+    # Formatting it
     subject_pre = content.find('meta', {'name':'dcterms.subject'})
     subject_bite_remove=subject_pre.encode(formatter=SortAttributes())
     subject_bite_remove = subject_bite_remove.decode('utf8')
-    for tag in content1.find_all('link', {'rel':'canonical'}):
+    for tag in content1.find_all('meta', {'name':'dcterms.subject'}):
         subject = str(tag.sourceline)+". "+str(subject_bite_remove)
         print(subject)
     
@@ -231,14 +339,8 @@ def scrape():
             adobeendtag = "None"
             print(adobe_end_tag)
 
-    #code to reformat
-    xml_string = str(access_rights)
-    soup = BeautifulSoup(xml_string, 'html.parser')
-    bite_remove=soup.encode(formatter=SortAttributes())
-    print(bite_remove.decode('utf8'))
 
-
-    return render_template('scrape.html',option=lang, content=content1, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language,viewport = viewport, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
+    return render_template('scrape.html', content=content1, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language,viewport = viewport, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
 
 
     #try:       
