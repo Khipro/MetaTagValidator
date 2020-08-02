@@ -95,20 +95,48 @@ def scrape():
     date_issued = content.find('meta', {'name':'dcterms.issued'})
     date_modified = content.find('meta', {'name':'dcterms.modified'})
     creator = content.find('meta', {'name':'dcterms.creator'})
+
+    #search for dcterms.subjects
     subject = content.find('meta', {'name':'dcterms.subject'})
     
     #Search for the dcterms.language
     language_pre = content.find('meta', {'name':'dcterms.language'})
     language_bite_remove=language_pre.encode(formatter=SortAttributes())
     language_bite_remove = language_bite_remove.decode('utf8')
-    language_original = """<meta name="dcterms.language" title="ISO639-2" content="eng"/>"""
+    language_original_eng = """<meta name="dcterms.language" title="ISO639-2" content="eng"/>"""
+    language_original_fra = """<meta name="dcterms.language" title="ISO639-2" content="fra" />"""
     for tag in content1.find_all('meta', {'name':'dcterms.language'}):    
-        if str(language_bite_remove) == language_original:
-            language = str(tag.sourceline)+". "+str(language_bite_remove)
-            print(language)
+        if lang == "English":
+            if str(language_bite_remove) == language_original_eng:
+                language = str(tag.sourceline)+". "+str(language_bite_remove)
+                print(language)
+            else:
+                language = "None"
+                print(language)
+        elif lang == "French":
+            if str(language_bite_remove) == language_original_fra:
+                language = str(tag.sourceline)+". "+str(language_bite_remove)
+                print(language)
+            else:
+                language = "None"
+                print(language)
         else:
             language = "None"
             print(language)
+
+    #find viewport
+    #Validate and format it
+    viewport_pre = content.find('meta', {'name':'viewport'})
+    print(viewport_pre)
+    viewport_original = """<meta content="width=device-width,initial-scale=1" name="viewport"/>"""
+
+    for tag in content1.find_all('meta', {'name':'viewport'}):
+        if str(viewport_pre) == viewport_original:
+            viewport = str(tag.sourceline) + ". "+ str(viewport_pre)
+            print(viewport)
+        else:
+            viewport = "None"
+            print(viewport)
 
     #Searching for the url cononical
     #Validation and output formatting 
@@ -204,7 +232,7 @@ def scrape():
     print(bite_remove.decode('utf8'))
 
 
-    return render_template('scrape.html',option=lang, content=content1, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
+    return render_template('scrape.html',option=lang, content=content1, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language,viewport = viewport, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
 
 
     #try:       
