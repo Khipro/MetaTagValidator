@@ -71,7 +71,7 @@ def scrape():
     if code == "":
         flash('Failed to retrieve "%s"' % code, 'danger')
     if not urlValidator:
-        content1 = BeautifulSoup(code,'lxml').prettify()
+        content1 = BeautifulSoup(code,'xml')
         content = BeautifulSoup(code,'lxml')
 
 
@@ -79,7 +79,7 @@ def scrape():
         content1 = requests.get(code)
         content1 = BeautifulSoup(content1.text, 'html.parser')
         content = requests.get(code)
-        content = BeautifulSoup(content.text, 'lxml')
+        content = BeautifulSoup(content.text, 'xml')
 
     meta = content.find("meta", charset="utf-8")
     title = content.find("title")
@@ -92,12 +92,37 @@ def scrape():
     subject = content.find('meta', {'name':'dcterms.subject'})
     language = content.find('meta', {'name':'dcterms.language'})
     url_canonical = content.find('link', {'rel':'canonical'})
-    service = content.find('meta', {'property':'dcterms:service'})
+
+    #Searching 1st Adobe tag
+    #validating it.
+    service_pre = content.find('meta', {'property':'dcterms:service'})
+    service_xml_string = str(service_pre)
+    soup = BeautifulSoup(service_xml_string, 'html.parser')
+    service_bite_remove=soup.encode(formatter=SortAttributes())
+    service_bit_remove = service_bite_remove.decode('utf8')
+    service_original = """<meta property="dcterms:service" content="StatCan"/>"""
+    if service_bit_remove == service_original:
+        service = service_bit_remove
+        print(service)
+    else:
+        service = "None"
+        print(service)
 
     #Searching 2nd Adobe tag
     #validating it.
-    access_rights = content.find('meta', {'property':'dcterms:accessRights'})
-    
+    access_rights_pre = content.find('meta', {'property':'dcterms:accessRights'})
+    xml_string = str(access_rights_pre)
+    soup = BeautifulSoup(xml_string, 'html.parser')
+    bite_remove=soup.encode(formatter=SortAttributes())
+    bit_remove = bite_remove.decode('utf8')
+    access_rights_original = """<meta property="dcterms:accessRights" content="2"/>"""
+    if bit_remove == access_rights_original:
+        access_rights = bit_remove
+        print(access_rights)
+    else:
+        access_rights = "None"
+        print(access_rights)
+
     
     #Finding the 3rd Adobe tag and validating
     #Both with and without https scraped and validated
