@@ -55,10 +55,16 @@ class SortAttributes(XMLFormatter):
 
 @app.route('/scrape')
 def scrape():
-    #flash(request.args.get('url'), 'success')
-    #url = request.args.get('url')
+    
+    
+    lang = request.args.get('lang')
+    if lang == "":
+        flash('Failed to retrieve "%s"' % lang, 'danger')
+    else:
+        print(lang)
+
     code = request.args.get('url')
-    #print("Code:", code)
+    
     regex = re.compile(
         r'^(?:http|ftp)s?://' # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' #domain...
@@ -96,20 +102,23 @@ def scrape():
     language_bite_remove=language_pre.encode(formatter=SortAttributes())
     language_bite_remove = language_bite_remove.decode('utf8')
     language_original = """<meta name="dcterms.language" title="ISO639-2" content="eng"/>"""
-    if str(language_bite_remove) == language_original:
-        language = language_bite_remove
-        print(language)
-    else:
-        language = "None"
-        print(language)
+    for tag in content1.find_all('meta', {'name':'dcterms.language'}):    
+        if str(language_bite_remove) == language_original:
+            language = str(tag.sourceline)+". "+str(language_bite_remove)
+            print(language)
+        else:
+            language = "None"
+            print(language)
 
     #Searching for the url cononical
     #Validation and output formatting 
     
     url_canonical_pre = content.find('link', {'rel':'canonical'})
     url_canonical_bite_remove=url_canonical_pre.encode(formatter=SortAttributes())
-    url_canonical = url_canonical_bite_remove.decode('utf8')
-    
+    url_canonical_bite_remove = url_canonical_bite_remove.decode('utf8')
+    for tag in content1.find_all('link', {'rel':'canonical'}):
+        url_canonical = str(tag.sourceline)+". "+str(url_canonical_bite_remove)
+        print(url_canonical)
     
     #Searching 1st Adobe tag
     #validating it.
@@ -119,12 +128,13 @@ def scrape():
     service_bite_remove=soup.encode(formatter=SortAttributes())
     service_bit_remove = service_bite_remove.decode('utf8')
     service_original = """<meta property="dcterms:service" content="StatCan"/>"""
-    if service_bit_remove == service_original:
-        service = service_bit_remove
-        print(service)
-    else:
-        service = "None"
-        print(service)
+    for tag in content1.find_all('meta', {'property':'dcterms:service'}):   
+        if service_bit_remove == service_original:
+            service = str(tag.sourceline)+". "+str(service_bit_remove)
+            print(service)
+        else:
+            service = "None"
+            print(service)
 
     #Searching 2nd Adobe tag
     #validating it.
@@ -134,12 +144,13 @@ def scrape():
     bite_remove=soup.encode(formatter=SortAttributes())
     bit_remove = bite_remove.decode('utf8')
     access_rights_original = """<meta property="dcterms:accessRights" content="2"/>"""
-    if bit_remove == access_rights_original:
-        access_rights = bit_remove
-        print(access_rights)
-    else:
-        access_rights = "None"
-        print(access_rights)
+    for tag in content1.find_all('meta', {'property':'dcterms:accessRights'}):    
+        if bit_remove == access_rights_original:
+            access_rights = str(tag.sourceline)+". "+str(bit_remove)
+            print(access_rights)
+        else:
+            access_rights = "None"
+            print(access_rights)
 
     
     #Finding the 3rd Adobe tag and validating
@@ -147,40 +158,44 @@ def scrape():
     adobe_script = content.find('script', {'src':'https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
     adobe_original1= """<script src="https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js"></script>"""
     adobe_original2="""<script src="//assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js"></script>"""
-    if  str(adobe_script) == adobe_original1:
-        adobe_third = adobe_script
-        print(adobe_third)   
-    elif adobe_script == None:
-        adobe_script2= content.find('script', {'src':'//assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
-        if str(adobe_script2) == adobe_original2:
-            adobe_third = adobe_script2
-            print(adobe_third)
+    for tag in content1.find_all('script', {'src':'https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'}):    
+        if  str(adobe_script) == adobe_original1:
+            adobe_third = str(tag.sourceline)+". "+str(adobe_script)
+            print(adobe_third)   
+        elif adobe_script == None:
+            adobe_script2= content.find('script', {'src':'//assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'})
+            for tag in content1.find_all('script', {'src':'//assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'}):
+                if str(adobe_script2) == adobe_original2:
+                    adobe_third = str(tag.sourceline)+". "+str(adobe_script2)
+                    print(adobe_third)
+                else:
+                    adobe_third = "None"
+                    print(adobe_third)
         else:
             adobe_third = "None"
             print(adobe_third)
-    else:
-        adobe_third = "None"
-        print(adobe_third)
 
 
     #Validate the end location of the Adove tag
     #Validate if it is maghing the exact tag
     adobe = content.find_all('script',{"type":"text/javascript"})
-    if adobe == [] or adobe == None:
-        adobe_end_tag = "None"
-        print(adobe_end_tag)
-    elif adobe !=0: 
-        x = len(adobe)-1
-        adobe_end_tag = (adobe[x])
-        adobe_original ="""<script type="text/javascript">_satellite.pageBottom();</script>"""
-        if str(adobe_end_tag) == adobe_original:
-            print(adobe_end_tag)
-        else:
+    for tag in content1.find_all('script',{"type":"text/javascript"}):
+        if adobe == [] or adobe == None:
             adobe_end_tag = "None"
             print(adobe_end_tag)
-    else:
-        adobeendtag = "None"
-        print(adobe_end_tag)
+        elif adobe !=0: 
+            x = len(adobe)-1
+            adobe_end_tag = (adobe[x])
+            adobe_original ="""<script type="text/javascript">_satellite.pageBottom();</script>"""
+            if str(adobe_end_tag) == adobe_original:
+                adobe_end_tag = str(tag.sourceline) + ". " + str(adobe_end_tag)
+                print(adobe_end_tag)
+            else:
+                adobe_end_tag = "None"
+                print(adobe_end_tag)
+        else:
+            adobeendtag = "None"
+            print(adobe_end_tag)
 
     #code to reformat
     xml_string = str(access_rights)
@@ -189,7 +204,7 @@ def scrape():
     print(bite_remove.decode('utf8'))
 
 
-    return render_template('scrape.html', content=content1, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
+    return render_template('scrape.html',option=lang, content=content1, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
 
 
     #try:       

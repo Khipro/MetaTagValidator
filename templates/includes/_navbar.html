@@ -51,14 +51,28 @@
 </ul>
 
 <div class="tab-content">
-  <div id="home" class="tab-pane fade in active">
-    <h3>URL</h3>  
+  <br>
+  
+  <div id="home" class="tab-pane fade in active"> 
+          
+      
+      
       <div class="row">
         <div class="col">
           <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-              <form class="form-inline mt-2 mt-md-0 mx-auto" action="/scrape">
-                <input class="form-control mr-sm-2" type="text" placeholder="Enter a URL to test." name="url">            
+              <form  action="/scrape">
+                <h4>Select Language of page being tested:</h4> 
+                <div class="radio" action="/scrape">
+                  <label>
+                    <h4><input type="radio" name="lang" id="anynum" value= "English">English</h4>
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <h4><input type="radio" name="lang" id="issuenum" value= "French">French</h4>
+                  </label>
+                </div>
+                <h3>URL</h3>
+                <input class="form-control mr-sm-2" type="text" placeholder="Enter a URL to test." name="url"><br>            
                 <button class="btn btn-primary my-2 my-sm-0" type="submit">Test</button>
               </form>
             </div>
@@ -69,12 +83,22 @@
   
   </div>
   <div id="menu1" class="tab-pane fade">
-    <h3>CODE</h3> 
+    
       <div class="row">
         <div class="col">
           <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-              <form class="form-inline mt-2 mt-md-0 mx-auto" action="/scrape">
+              <form action="/scrape">
+                <h4>Select Language of page being tested:</h4> 
+                <div class="radio" action="/scrape">
+                  <label>
+                    <h4><input type="radio" name="lang" id="anynum" value= "English">English</h4>
+                  </label>&nbsp;&nbsp;
+                  <label>
+                    <h4><input type="radio" name="lang" id="issuenum" value= "French">French</h4>
+                  </label>
+                </div>
+                <h3>CODE</h3>
                 <input class="form-control mr-sm-2" type="text" placeholder="Paste a Code to test." name="url" style="height:110px;width:800px;"> 
                 <br>           
                 <button class="btn btn-primary my-2 my-sm-0" onclick="$('#loading').show();" type="submit">Test Code</button>
