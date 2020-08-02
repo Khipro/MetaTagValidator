@@ -97,7 +97,13 @@ def scrape():
     creator = content.find('meta', {'name':'dcterms.creator'})
 
     #search for dcterms.subjects
-    subject = content.find('meta', {'name':'dcterms.subject'})
+    
+    subject_pre = content.find('meta', {'name':'dcterms.subject'})
+    subject_bite_remove=subject_pre.encode(formatter=SortAttributes())
+    subject_bite_remove = subject_bite_remove.decode('utf8')
+    for tag in content1.find_all('link', {'rel':'canonical'}):
+        subject = str(tag.sourceline)+". "+str(subject_bite_remove)
+        print(subject)
     
     #Search for the dcterms.language
     language_pre = content.find('meta', {'name':'dcterms.language'})
