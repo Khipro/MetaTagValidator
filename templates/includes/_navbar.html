@@ -92,14 +92,14 @@
                 <h4>Select Language of page being tested:</h4> 
                 <div class="radio" action="/scrape">
                   <label>
-                    <h4><input type="radio" name="lang" id="anynum" value= "English">English</h4>
+                    <h4><input type="radio" name="lang" id="anynum" value= "English" required>English</h4>
                   </label>&nbsp;&nbsp;
                   <label>
-                    <h4><input type="radio" name="lang" id="issuenum" value= "French">French</h4>
+                    <h4><input type="radio" name="lang" id="issuenum" value= "French" required>French</h4>
                   </label>
                 </div>
                 <h3>CODE</h3>
-                <input class="form-control mr-sm-2" type="text" placeholder="Paste a Code to test." name="url" style="height:110px;width:800px;"> 
+                <input class="form-control mr-sm-2" type="text" placeholder="Paste a Code to test." name="url" style="height:110px;width:800px;" required> 
                 <br>           
                 <button class="btn btn-primary my-2 my-sm-0" onclick="$('#loading').show();" type="submit">Test Code</button>
               </form>
