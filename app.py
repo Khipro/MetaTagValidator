@@ -479,7 +479,7 @@ def scrape():
     return render_template('scrape.html', content=None, meta = None, title = None, description = None ,
      keywords=None,title2=None,dateissued=None,datemodified=None, creator =None, subject= None, language=None,
      viewport = None, urlcanonical= None, service = None , accessrights = None, adobescript = None,
-     adobeendtag= None , old_dc_description = old_dc_description,
+     adobeendtag= None , old_dc_description = None,
         old_dcterms_description = None,
         old_date =  None,
         old_author = None,
