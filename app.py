@@ -90,8 +90,10 @@ def scrape():
         
         
         if not urlValidator:
+            content_just_print = BeautifulSoup(code,'lxml').prettify()
             content1 = BeautifulSoup(code,'lxml')
             content = BeautifulSoup(code,'lxml')
+            
 
 
         else:
@@ -403,25 +405,31 @@ def scrape():
             else:
                 adobe_end_tag = "None"
                 print(adobe_end_tag)
+
+        if not urlValidator:
+            final_string = content_just_print
+            print(final_string)       
+        
+        else:
+            with open('\\Users\\KIPandSHREE\\Documents\\test1.txt', 'w') as file:
+                file.write(content1_pre.text)
+
+            path = "\\Users\\KIPandSHREE\\Documents\\test1.txt"
+            file_path = str(path)
+
+
+            with open(file_path, 'r') as f:
+                list_pre =[]
+                final_string =[]
+                for i, line in enumerate(f, start=1):
+                    first_list= '{}  {}'.format(i, line.strip())
+                    list_pre.append(first_list)
                 
+                final_string = '\n'.join(list_pre)
+                print(final_string)
+        
+        
 
-
-        with open('\\Users\\KIPandSHREE\\Documents\\test1.txt', 'w') as file:
-            file.write(content1_pre.text)
-
-        path = "\\Users\\KIPandSHREE\\Documents\\test1.txt"
-        file_path = str(path)
-
-
-        with open(file_path, 'r') as f:
-            list_pre =[]
-            final_string =[]
-            for i, line in enumerate(f, start=1):
-                first_list= '{}  {}'.format(i, line.strip())
-                list_pre.append(first_list)
-            
-            final_string = '\n'.join(list_pre)
-            print(final_string)
 
         return render_template('scrape.html', content=final_string, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language,viewport = viewport, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
     return render_template('scrape.html', content=None, meta = None, title = None, description = None , keywords=None,title2=None,dateissued=None,datemodified=None, creator =None, subject= None, language=None,viewport = None, urlcanonical= None, service = None , accessrights = None, adobescript = None, adobeendtag= None)
