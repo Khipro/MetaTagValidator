@@ -428,11 +428,75 @@ def scrape():
                 final_string = '\n'.join(list_pre)
                 print(final_string)
         
+        # Find Old tags
+        old_title = content.find('meta', {'name':'title'})
+        old_dc_title = content.find('meta', {'name':'dc.title'})
+        old_dc_description = content.find('meta', {'name':'dc.description'})
+        old_dcterms_description = content.find('meta', {'name':'dcterms.description'})
+        old_date = content.find('meta', {'name':'date'})
+        old_author = content.find('meta', {'name':'author'})
+        old_dc_language = content.find('meta', {'name':'dc.language'})
+        old_dc_subject = content.find('meta', {'name':'dc.subject'})
+        old_dc_creator = content.find('meta', {'name':'dc.creator'})
+        old_STCkeywords = content.find('meta', {'name':'STCkeywords'})
+        old_STCtopic = content.find('meta', {'name':'STCtopic'})
+        old_STCtopicID = content.find('meta', {'name':'STCtopicID'})
+        old_STCsubtopic = content.find('meta', {'name':'STCsubtopic'})
+        old_STCsubtopicID = content.find('meta', {'name':'STCsubtopicID'})
+        old_STCtype = content.find('meta', {'name':'STCtype'})
+        old_STCsource = content.find('meta', {'name':'STCsource'})
+        old_STCstatus = content.find('meta', {'name':'STCstatus'})
+        old_STClist = content.find('meta', {'name':'STClist'})
+        old_STCthesaurus = content.find('meta', {'name':'STCthesaurus'})
+        old_STCprice = content.find('meta', {'name':'STCprice'})
         
 
 
-        return render_template('scrape.html', content=final_string, meta = meta, title = title, description = description , keywords=keywords,title2=title2,dateissued=date_issued,datemodified=date_modified, creator = creator, subject= subject, language=language,viewport = viewport, urlcanonical=url_canonical, service = service , accessrights =  access_rights, adobescript = adobe_third, adobeendtag= adobe_end_tag)
-    return render_template('scrape.html', content=None, meta = None, title = None, description = None , keywords=None,title2=None,dateissued=None,datemodified=None, creator =None, subject= None, language=None,viewport = None, urlcanonical= None, service = None , accessrights = None, adobescript = None, adobeendtag= None)
+        return render_template('scrape.html', content=final_string, meta = meta, title = title,
+         description = description , keywords=keywords,title2=title2,dateissued=date_issued,
+         datemodified=date_modified, creator = creator, subject= subject, language=language,
+         viewport = viewport, urlcanonical=url_canonical, service = service , accessrights =  access_rights,
+         adobescript = adobe_third, adobeendtag= adobe_end_tag ,
+        old_dc_description = old_dc_description,
+        old_dcterms_description = old_dcterms_description,
+        old_date =  old_date,
+        old_author = old_author,
+        old_dc_language = old_dc_language,
+        old_dc_subject = old_dc_subject,
+        old_dc_creator = old_dc_creator,
+        old_STCkeywords = old_STCkeywords,
+        old_STCtopic = old_STCtopic,
+        old_STCtopicID = old_STCtopicID,
+        old_STCsubtopic = old_STCsubtopic,
+        old_STCsubtopicID = old_STCsubtopicID,
+        old_STCtype = old_STCtype,
+        old_STCsource = old_STCsource,
+        old_STCstatus = old_STCstatus,
+        old_STClist = old_STClist,
+        old_STCthesaurus = old_STCthesaurus,
+        old_STCprice = old_STCprice)
+
+    return render_template('scrape.html', content=None, meta = None, title = None, description = None ,
+     keywords=None,title2=None,dateissued=None,datemodified=None, creator =None, subject= None, language=None,
+     viewport = None, urlcanonical= None, service = None , accessrights = None, adobescript = None,
+     adobeendtag= None , old_dc_description = old_dc_description,
+        old_dcterms_description = None,
+        old_date =  None,
+        old_author = None,
+        old_dc_language = None,
+        old_dc_subject = None,
+        old_dc_creator = None,
+        old_STCkeywords = None,
+        old_STCtopic = None,
+        old_STCtopicID = None,
+        old_STCsubtopic = None,
+        old_STCsubtopicID = None,
+        old_STCtype = None,
+        old_STCsource = None,
+        old_STCstatus = None,
+        old_STClist = None,
+        old_STCthesaurus = None,
+        old_STCprice = None)
 
     #try:       
       #  response = requests.get(url)
