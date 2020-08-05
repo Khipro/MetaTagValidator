@@ -523,30 +523,124 @@ def scrape():
         
         # Find Old tags
         old_title_pre = content.find('meta', {'name':'title'})
-        if old_title_pre !=0:
+        if old_title_pre !=None:
             old_title = "Old meta tag [ title ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
         else:
             old_title = ""
 
-        old_dc_title = content.find('meta', {'name':'dc.title'})
-        old_dc_description = content.find('meta', {'name':'dc.description'})
-        old_dcterms_description = content.find('meta', {'name':'dcterms.description'})
-        old_date = content.find('meta', {'name':'date'})
-        old_author = content.find('meta', {'name':'author'})
-        old_dc_language = content.find('meta', {'name':'dc.language'})
-        old_dc_subject = content.find('meta', {'name':'dc.subject'})
-        old_dc_creator = content.find('meta', {'name':'dc.creator'})
-        old_STCkeywords = content.find('meta', {'name':'STCkeywords'})
-        old_STCtopic = content.find('meta', {'name':'STCtopic'})
-        old_STCtopicID = content.find('meta', {'name':'STCtopicID'})
-        old_STCsubtopic = content.find('meta', {'name':'STCsubtopic'})
-        old_STCsubtopicID = content.find('meta', {'name':'STCsubtopicID'})
-        old_STCtype = content.find('meta', {'name':'STCtype'})
-        old_STCsource = content.find('meta', {'name':'STCsource'})
-        old_STCstatus = content.find('meta', {'name':'STCstatus'})
-        old_STClist = content.find('meta', {'name':'STClist'})
-        old_STCthesaurus = content.find('meta', {'name':'STCthesaurus'})
-        old_STCprice = content.find('meta', {'name':'STCprice'})
+        old_dc_title_pre = content.find('meta', {'name':'dc.title'})
+        if old_dc_title_pre !=None:
+            old_dc_title = "Old meta tag [ dc.title ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_dc_title = ""
+
+        old_dc_description_pre = content.find('meta', {'name':'dc.description'})
+        if old_dc_description_pre !=None:
+            old_dc_description = "Old meta tag [ dc.description ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_dc_description = ""
+
+        old_dcterms_description_pre = content.find('meta', {'name':'dcterms.description'})
+        if old_dcterms_description_pre !=None:
+            old_dcterms_description = "Old meta tag [ dcterms.description ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_dcterms_description = ""
+
+        old_date_pre = content.find('meta', {'name':'date'})
+        if old_date_pre !=None:
+            old_date = "Old meta tag [ date ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_date = ""
+
+        old_author_pre = content.find('meta', {'name':'author'})
+        if old_author_pre !=None:
+            old_author = "Old meta tag [ author ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_author = ""
+
+        old_dc_language_pre = content.find('meta', {'name':'dc.language'})
+        if old_dc_language_pre !=None:
+            old_dc_language = "Old meta tag [ dc.language ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_dc_language = ""
+
+        old_dc_subject_pre = content.find('meta', {'name':'dc.subject'})
+        if old_dc_subject_pre !=None:
+            old_dc_subject = "Old meta tag [ dc.subject ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_dc_subject = ""
+
+        old_dc_creator_pre = content.find('meta', {'name':'dc.creator'})
+        if old_dc_creator_pre !=None:
+            old_dc_creator = "Old meta tag [ dc.creator ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_dc_creator = ""
+
+        old_STCkeywords_pre = content.find('meta', {'name':'STCkeywords'})
+        if old_STCkeywords_pre !=None:
+            old_STCkeywords = "Old meta tag [ STCkeywords ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCkeywords = ""
+            
+        old_STCtopic_pre = content.find('meta', {'name':'STCtopic'})
+        if old_STCtopic_pre !=None:
+            old_STCtopic = "Old meta tag [ STCtopic ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCtopic = ""
+
+        old_STCtopicID_pre = content.find('meta', {'name':'STCtopicID'})
+        if old_STCtopicID_pre !=None:
+            old_STCtopicID = "Old meta tag [ STCtopicID ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCtopicID = ""
+
+        old_STCsubtopic_pre = content.find('meta', {'name':'STCsubtopic'})
+        if old_STCsubtopic_pre !=None:
+            old_STCsubtopic = "Old meta tag [ STCsubtopic ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCsubtopic = ""
+
+        old_STCsubtopicID_pre = content.find('meta', {'name':'STCsubtopicID'})
+        if old_STCsubtopicID_pre !=None:
+            old_STCsubtopicID = "Old meta tag [ STCsubtopicID ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCsubtopicID = ""
+            
+        old_STCtype_pre = content.find('meta', {'name':'STCtype'})
+        if old_STCtype_pre !=None:
+            old_STCtype = "Old meta tag [ STCtype ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCtype = ""
+
+        old_STCsource_pre = content.find('meta', {'name':'STCsource'})
+        if old_STCsource_pre !=None:
+            old_STCsource = "Old meta tag [ STCsource ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCsource = ""
+
+        old_STCstatus_pre = content.find('meta', {'name':'STCstatus'})
+        if old_STCstatus_pre !=None:
+            old_STCstatus = "Old meta tag [ STCstatus ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCstatus = ""
+
+        old_STClist_pre = content.find('meta', {'name':'STClist'})
+        if old_STClist_pre !=None:
+            old_STClist = "Old meta tag [ STClist ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STClist = ""
+
+        old_STCthesaurus_pre = content.find('meta', {'name':'STCthesaurus'})
+        if old_STCthesaurus_pre !=None:
+            old_STCthesaurus = "Old meta tag [ STCthesaurus ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCthesaurus = ""
+
+        old_STCprice_pre = content.find('meta', {'name':'STCprice'})
+        if old_STCprice_pre !=None:
+            old_STCprice = "Old meta tag [ STCprice ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_STCprice = ""
         
 
 
