@@ -159,38 +159,62 @@ old_STCprice ==""
 </div>
 
 <div>
-  {% if meta_validation =="" and
-  title_validation =="" and
-  description_validation =="" and
-  keywords_validation=="" and
-  creator_validation=="" and
-  title2_validation=="" and
-  date_issued_validation=="" and
-  date_modified_validation=="" and
-  subject_validation=="" and
-  language_validation=="" %}
-  <div class="card border-danger mb-3" style="max-width: auto;">
-    <div class="bg-danger text-white">
-    <div class="card-header">Error</div></div>
-    <div class="card-body text-primary">
-      <h5 class="card-title"></h5>
-      <p class="card-text">
-        {{error_meta}}<br>
-        {{error_title}}<br>
-        {{error_description}}<br>
-        {{error_keywords}}<br>
-        {{error_creator}}<br>
-        {{error_title2}}<br>
-        {{error_dcterms_issued}}<br>
-        {{error_dcterms_modified}}<br>
-        {{error_dcterms_subject}}<br>
-        {{error_dcterms_language}}<br>
-      </p>
+  {% if meta_validation !="Yes01" or
+  title_validation !="Yes01" or
+  description_validation !="Yes01" or
+  keywords_validation!="Yes01" or
+  creator_validation!="Yes01" or
+  title2_validation!="Yes01" or
+  date_issued_validation!="Yes01" or
+  date_modified_validation!="Yes01" or
+  subject_validation!="Yes01" or
+  language_validation!="Yes01" %}
+    <div class="card border-danger mb-3" style="max-width: auto;">
+      <div class="bg-danger text-white">
+      <div class="card-header">Error</div></div>
+      <div class="card-body text-primary">
+        <h5 class="card-title"></h5>
+        <p class="card-text">
+          {{error_meta}}<br>
+          {{error_title}}<br>
+          {{error_description}}<br>
+          {{error_keywords}}<br>
+          {{error_creator}}<br>
+          {{error_title2}}<br>
+          {{error_dcterms_issued}}<br>
+          {{error_dcterms_modified}}<br>
+          {{error_dcterms_subject}}<br>
+          {{error_dcterms_language}}<br>
+        </p>
+      </div>
     </div>
-  </div>
   {% endif %}
 </div>
 
+<div>
+  {% if 
+  error_canonical!="" or
+  old_title !="" or
+  old_dc_title !="" or
+  old_dc_description  !="" or
+  old_dcterms_description  !="" or
+  old_date !="" or
+  old_author  !="" or
+  old_dc_language  !="" or
+  old_dc_subject !="" or
+  old_dc_creator !="" or
+  old_STCkeywords !="" or
+  old_STCtopic !="" or
+  old_STCtopicID !="" or
+  old_STCsubtopic !="" or
+  old_STCsubtopicID !="" or
+  old_STCtype !="" or
+  old_STCsource !="" or
+  old_STCstatus !="" or
+  old_STClist !="" or
+  old_STCthesaurus !="" or
+  old_STCprice !="" 
+  %}
 <div class="card border-warning mb-3" style="max-width: auto;">
   <div class="bg-warning text-white">
   <div class="card-header">Warning</div></div>
@@ -221,6 +245,9 @@ old_STCprice ==""
       </p>
   </div>
 </div>
+{% endif %}
+</div>
+
 <div>
   {% if viewport == "" %}
   <div class="card border-primary mb-3" style="max-width: auto;">
@@ -277,11 +304,13 @@ error_adobe_end_tag==""
   </div>
 </div>
 
+
+
 <div>
 {% if 
-  error_service!="" and
-  error_accessRights!="" and
-  error_adobe_third!="" and
+  error_service!="" or
+  error_accessRights!="" or
+  error_adobe_third!="" or
   error_adobe_end_tag!="" 
   %}
 <div class="card border-danger mb-3" style="max-width: auto;">

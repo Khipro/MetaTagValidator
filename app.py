@@ -112,6 +112,8 @@ def scrape():
                 print(meta)
                 error_meta =""
                 print(error_meta)
+                meta_validation = "Yes01"
+                print(meta_validation)
         else:
             meta = ""
             print(meta)
@@ -128,6 +130,8 @@ def scrape():
                 print(title)
                 error_title = ""
                 print(error_title)
+                title_validation ="Yes01"
+                print(title_validation)
         else:
             title =""
             print(title)
@@ -146,6 +150,8 @@ def scrape():
                 print(description)
                 error_description = ""
                 print(error_description)
+                description_validation = "Yes01"
+                print(description_validation)
         else:
             description = ""
             print(description)
@@ -164,6 +170,8 @@ def scrape():
                 print(keywords)
                 error_keywords = ""
                 print(error_keywords)
+                keywords_validation = "Yes01"
+                print(keywords_validation)
         else:
             keywords = ""
             print(keywords)
@@ -186,22 +194,30 @@ def scrape():
                         print(creator)
                         error_creator = ""
                         print(error_creator)
+                        creator_validation = "Yes01"
+                        print(creator_validation)
                     else:
                         creator = ""
                         print(creator)
                         error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
                         print(error_creator)
+                        creator_validation = ""
+                        print(creator_validation)
                 elif lang == "French":
                     if str(creator_bite_remove) == creator_original_fra:
                         creator = str(tag.sourceline)+". "+str(creator_bite_remove)
                         print(creator)
                         error_creator = ""
                         print(error_creator)
+                        creator_validation = "Yes01"
+                        print(creator_validation)
                     else:
                         creator = ""
                         print(creator)
                         error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
                         print(error_creator)
+                        creator_validation = ""
+                        print(creator_validation)
         else:
             creator = ""
             print(creator)
@@ -220,6 +236,8 @@ def scrape():
                 print(title2)
                 error_title2 =  ""
                 print(error_title2) 
+                title2_validation = "Yes01"
+                print(title2_validation)
         else:
             title2 = ""
             print(title2)
@@ -247,11 +265,15 @@ def scrape():
                     print(date_issued)
                     error_dcterms_issued = ""
                     print(error_dcterms_issued)
+                    date_issued_validation ="Yes01"
+                    print(date_issued_validation)
             else:
                 date_issued =""
                 print(date_issued)
                 error_dcterms_issued = """Meta tag value for [ dcterms.issued ] appears to be in wrong format. Date fields should be in the format yyyy-mm-dd (e.g. 2020-04-29)"""
                 print(error_dcterms_issued)
+                date_issued_validation =""
+                print(date_issued_validation)
         else:
             date_issued =""
             print(date_issued)
@@ -280,9 +302,11 @@ def scrape():
                     print(date_modified)
                     error_dcterms_modified = ""
                     print(error_dcterms_modified)
+                    date_modified_validation ="Yes01"
             else:
                 date_modified =""
                 print(date_modified)
+                date_modified_validation =""
                 error_dcterms_modified = """Meta tag value for [ dcterms.modified ] appears to be in wrong format. Date fields should be in the format yyyy-mm-dd (e.g. 2020-04-29)"""
                 print(error_dcterms_modified)
         else:
@@ -303,6 +327,7 @@ def scrape():
                 print(subject)
                 error_dcterms_subject = ""
                 print(error_dcterms_subject)
+                subject_validation="Yes01"
         else:
             subject = ""
             print(subject)
@@ -324,12 +349,14 @@ def scrape():
                         print(language)
                         error_dcterms_language = ""
                         print(error_dcterms_language)
+                        language_validation="Yes01"
 
                     else:
                         language = ""
                         print(language)
                         error_dcterms_language = """Meta tag value for [ English ] appears to be in the wrong language for the page selected. Please refer to the values in the instructions or contact the Search Solutions Unit (SSU) for assistance."""
                         print(error_dcterms_language)
+                        language_validation=""
 
                 elif lang == "French":
                     if str(language_bite_remove) == language_original_fra:
@@ -337,16 +364,19 @@ def scrape():
                         print(language)
                         error_dcterms_language = ""
                         print(error_dcterms_language)
+                        language_validation="Yes01"
                     else:
                         language = ""
                         print(language)
                         error_dcterms_language = """Meta tag value for [ French ] appears to be in the wrong language for the page selected. Please refer to the values in the instructions or contact the Search Solutions Unit (SSU) for assistance."""
                         print(error_dcterms_language)
+                        language_validation=""
                 else:
                     language = ""
                     print(language)
                     error_dcterms_language = """Required meta tag [ dcterms.language ] is missing. Please review your code."""
                     print(error_dcterms_language)
+                    language_validation=""
         else:
             language = ""
             print(language)
@@ -715,7 +745,17 @@ def scrape():
         error_service=error_service,
         error_accessRights=error_accessRights,
         error_adobe_third=error_adobe_third,
-        error_adobe_end_tag=error_adobe_end_tag )
+        error_adobe_end_tag=error_adobe_end_tag,
+        meta_validation =meta_validation,
+        title_validation =title_validation,
+        description_validation =description_validation,
+        keywords_validation=keywords_validation,
+        creator_validation=creator_validation,
+        title2_validation=title2_validation,
+        date_issued_validation=date_issued_validation,
+        date_modified_validation=date_modified_validation,
+        subject_validation=subject_validation,
+        language_validation=language_validation)
 
     return render_template('scrape.html',
     content=None,
