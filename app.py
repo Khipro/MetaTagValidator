@@ -115,6 +115,8 @@ def scrape():
         else:
             meta = ""
             print(meta)
+            meta_validation = ""
+            print(meta_validation)
             error_meta ="""Required meta tag [ <meta charset="utf-8"/> ] is missing. Please review your code."""
             print(error_meta)
         
@@ -128,7 +130,9 @@ def scrape():
                 print(error_title)
         else:
             title =""
-            print(tit)
+            print(title)
+            title_validation =""
+            print(title_validation)
             error_title = """Required meta tag [ title ] is missing. Please review your code."""
             print(error_title)
 
@@ -145,6 +149,8 @@ def scrape():
         else:
             description = ""
             print(description)
+            description_validation = ""
+            print(description_validation)
             error_description = """Required meta tag [ description ] is missing. Please review your code."""
             print(error_description)
 
@@ -161,6 +167,8 @@ def scrape():
         else:
             keywords = ""
             print(keywords)
+            keywords_validation = ""
+            print(keywords_validation)
             error_keywords = """Required meta tag [ keywords ] is missing. Please review your code."""
             print(error_keywords)
 
@@ -197,6 +205,8 @@ def scrape():
         else:
             creator = ""
             print(creator)
+            creator_validation = ""
+            print(creator_validation)
             error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
             print(error_creator)
 
@@ -213,6 +223,8 @@ def scrape():
         else:
             title2 = ""
             print(title2)
+            title2_validation = ""
+            print(title2_validation)
             error_title2 =  """Required meta tag [ dcterms.title ] is missing. Please review your code."""
             print(error_title2)  
         
@@ -243,6 +255,8 @@ def scrape():
         else:
             date_issued =""
             print(date_issued)
+            date_issued_validation =""
+            print(date_issued_validation)
             error_dcterms_issued = """Required meta tag [ dcterms.issued ] is missing. Please review your code."""
             print(error_dcterms_issued)
 
@@ -274,6 +288,7 @@ def scrape():
         else:
             date_modified =""
             print(date_modified)
+            date_modified_validation =""
             error_dcterms_modified = """Required meta tag [ dcterms.modified ] is missing. Please review your code."""
             print(error_dcterms_modified)
 
@@ -291,6 +306,7 @@ def scrape():
         else:
             subject = ""
             print(subject)
+            subject_validation=""
             error_dcterms_subject = """Required meta tag [ dcterms.subject ] is missing. Please review your code."""
             print(error_dcterms_subject)
         
@@ -329,9 +345,12 @@ def scrape():
                 else:
                     language = ""
                     print(language)
+                    error_dcterms_language = """Required meta tag [ dcterms.language ] is missing. Please review your code."""
+                    print(error_dcterms_language)
         else:
             language = ""
             print(language)
+            language_validation=""
             error_dcterms_language = """Required meta tag [ dcterms.language ] is missing. Please review your code."""
             print(error_dcterms_language)
 
@@ -661,6 +680,8 @@ def scrape():
         accessrights =  access_rights,
         adobescript = adobe_third,
         adobeendtag= adobe_end_tag ,
+        old_title = old_title,
+        old_dc_title= old_dc_title,
         old_dc_description = old_dc_description,
         old_dcterms_description = old_dcterms_description,
         old_date =  old_date,

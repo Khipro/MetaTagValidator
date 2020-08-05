@@ -81,6 +81,60 @@
           <h3 class="display-6">Meta Tags</h3>
     
 
+
+<div>
+{% if 
+error_meta =="" and
+error_title =="" and
+error_description =="" and
+error_keywords=="" and
+error_creator=="" and
+error_title2=="" and
+error_dcterms_issued=="" and
+error_dcterms_modified=="" and
+error_dcterms_subject=="" and
+error_dcterms_language=="" and
+error_viewport=="" and
+old_title =="" and
+old_dc_title =="" and
+old_dc_description  =="" and
+old_dcterms_description  =="" and
+old_date =="" and
+old_author  =="" and
+old_dc_language  =="" and
+old_dc_subject =="" and
+old_dc_creator =="" and
+old_STCkeywords =="" and
+old_STCtopic =="" and
+old_STCtopicID =="" and
+old_STCsubtopic =="" and
+old_STCsubtopicID =="" and
+old_STCtype =="" and
+old_STCsource =="" and
+old_STCstatus =="" and
+old_STClist =="" and
+old_STCthesaurus =="" and
+old_STCprice =="" 
+%}
+  <div class="card border-success mb-3" style="max-width: auto;">
+    <div class="bg-success text-white">
+      <div class="card-header">Success</div>
+    </div>
+      <div class="card-body text-primary">
+        <h5 class="card-title"></h5>
+      <p class="card-text">
+        The validator found no known meta tag errors.<br><br>
+        For new content:<br>
+        You may now proceed with requesting a metadata review with the Search Solutions Unit (SSU).
+        <br><br>
+        For existing content:<br>
+        Please ensure that the values in the meta tags match the values that were provided to you in past metadata reviews. If you have any questions, please contact the Search Solutions Unit (SSU).
+      </p> 
+    </div>
+  </div>
+{% endif %}
+</div>
+
 <div class="card border-success mb-3" style="max-width: auto;">
   <div class="bg-success text-white">
     <div class="card-header">Meta tag tested</div>
@@ -104,43 +158,37 @@
   </div>
 </div>
 
-<div class="card border-success mb-3" style="max-width: auto;">
-  <div class="bg-success text-white">
-    <div class="card-header">Success</div>
+<div>
+  {% if meta_validation =="" and
+  title_validation =="" and
+  description_validation =="" and
+  keywords_validation=="" and
+  creator_validation=="" and
+  title2_validation=="" and
+  date_issued_validation=="" and
+  date_modified_validation=="" and
+  subject_validation=="" and
+  language_validation=="" %}
+  <div class="card border-danger mb-3" style="max-width: auto;">
+    <div class="bg-danger text-white">
+    <div class="card-header">Error</div></div>
+    <div class="card-body text-primary">
+      <h5 class="card-title"></h5>
+      <p class="card-text">
+        {{error_meta}}<br>
+        {{error_title}}<br>
+        {{error_description}}<br>
+        {{error_keywords}}<br>
+        {{error_creator}}<br>
+        {{error_title2}}<br>
+        {{error_dcterms_issued}}<br>
+        {{error_dcterms_modified}}<br>
+        {{error_dcterms_subject}}<br>
+        {{error_dcterms_language}}<br>
+      </p>
+    </div>
   </div>
-  <div class="card-body text-primary">
-    <h5 class="card-title"></h5>
-    <p class="card-text">
-      The validator found no known meta tag errors.<br><br>
- 
-      For new content:<br>
-      You may now proceed with requesting a metadata review with the Search Solutions Unit (SSU).
-      <br><br>
-      For existing content:<br>
-      Please ensure that the values in the meta tags match the values that were provided to you in past metadata reviews. If you have any questions, please contact the Search Solutions Unit (SSU).
-      
-    </p> 
-  </div>
-</div>
-
-<div class="card border-danger mb-3" style="max-width: auto;">
-  <div class="bg-danger text-white">
-  <div class="card-header">Error</div></div>
-  <div class="card-body text-primary">
-    <h5 class="card-title"></h5>
-    <p class="card-text">
-      {{error_meta}}<br>
-      {{error_title}}<br>
-      {{error_description}}<br>
-      {{error_keywords}}<br>
-      {{error_creator}}<br>
-      {{error_title2}}<br>
-      {{error_dcterms_issued}}<br>
-      {{error_dcterms_modified}}<br>
-      {{error_dcterms_subject}}<br>
-      {{error_dcterms_language}}<br>
-    </p>
-  </div>
+  {% endif %}
 </div>
 
 <div class="card border-warning mb-3" style="max-width: auto;">
@@ -173,17 +221,20 @@
       </p>
   </div>
 </div>
-
-<div class="card border-primary mb-3" style="max-width: auto;">
-  <div class="bg-primary text-white">
-  <div class="card-header">Info</div></div>
-  <div class="card-body text-primary">
-    <h5 class="card-title">For assistance regarding meta tags or search, please email the Search Solutions Unit (SSU) at (STATCAN.F DISS-Search Solutions Unit / DIFF-Sous-section des solutions de recherche Web F.STATCAN).
-    </h5>
-    <p class="card-text">
-      {{error_viewport}}<br>
-    </p>
+<div>
+  {% if viewport == "" %}
+  <div class="card border-primary mb-3" style="max-width: auto;">
+    <div class="bg-primary text-white">
+    <div class="card-header">Info</div></div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">For assistance regarding meta tags or search, please email the Search Solutions Unit (SSU) at (statcan.diss-searchsolutionsunit-diff-sous-sectiondessolutionsderechercheweb.statcan@canada.ca).
+      </h5>
+      <p class="card-text">
+        {{error_viewport}}<br>
+      </p>
+    </div>
   </div>
+{% endif %}
 </div>
 
 
@@ -193,24 +244,46 @@
 <h3 class="display-6">Adobe Analytics</h3>
 
 
+<div>
+{% if 
+error_service=="" and
+error_accessRights=="" and
+error_adobe_third=="" and
+error_adobe_end_tag=="" 
+%}
+  <div class="card border-success mb-3" style="max-width: auto;">
+    <div class="bg-success text-white">
+    <div class="card-header">Success</div></div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">The validator found no known Adobe Analytics errors.</h5>
+      <p class="card-text"></p>
+    </div>
+  </div>
+{% endif %}
+</div>
+
+
+
 <div class="card border-success mb-3" style="max-width: auto;">
   <div class="bg-success text-white">
   <div class="card-header">Adobe tag tested</div></div>
   <div class="card-body text-primary">
     <h5 class="card-title"></h5>
-    <p class="card-text">{{service}}<br>{{accessrights}}<br>{{adobescript}}<br>{{adobeendtag}}</p>
+    <p class="card-text">
+      {{service}}<br>
+      {{accessrights}}<br>
+      {{adobescript}}<br>
+      {{adobeendtag}}</p>
   </div>
 </div>
 
-<div class="card border-success mb-3" style="max-width: auto;">
-  <div class="bg-success text-white">
-  <div class="card-header">Success</div></div>
-  <div class="card-body text-primary">
-    <h5 class="card-title">The validator found no known Adobe Analytics errors.</h5>
-    <p class="card-text"></p>
-  </div>
-</div>
-
+<div>
+{% if 
+  error_service!="" and
+  error_accessRights!="" and
+  error_adobe_third!="" and
+  error_adobe_end_tag!="" 
+  %}
 <div class="card border-danger mb-3" style="max-width: auto;">
   <div class="bg-danger text-white">
   <div class="card-header">Error</div></div>
@@ -223,6 +296,8 @@
       {{error_adobe_end_tag}}<br>
     </p>
   </div>
+</div>
+{% endif %}
 </div>
 
 <div class="card border-warning mb-3" style="max-width: auto;">
