@@ -110,9 +110,13 @@ def scrape():
             for tag in content1.find_all("meta", charset="utf-8"):
                 meta = str(tag.sourceline)+". "+str(meta_pre)
                 print(meta)
+                error_meta =""
+                print(error_meta)
         else:
-            meta = "None"
+            meta = ""
             print(meta)
+            error_meta ="""Required meta tag [ <meta charset="utf-8"/> ] is missing. Please review your code."""
+            print(error_meta)
         
         # Search and add line number to title
         title_pre = content.find("title")
@@ -120,29 +124,30 @@ def scrape():
             for tag in content1.find_all("title"):
                 title = str(tag.sourceline)+". "+str(title_pre)
                 print(title)
+                error_title = ""
+                print(error_title)
         else:
-            title ="None"
+            title =""
             print(tit)
+            error_title = """Required meta tag [ title ] is missing. Please review your code."""
+            print(error_title)
 
         # Search description and custom format
         description_pre = content.find('meta', {'name':'description'})
-        description_pre2 = content.find('meta', {'name':'dcterms.description'})
         if description_pre != None:
             description_bite_remove=description_pre.encode(formatter=SortAttributes())
             description_bite_remove = description_bite_remove.decode('utf8')
             for tag in content1.find_all('meta', {'name':'description'}):
                 description = str(tag.sourceline)+". "+str(description_bite_remove)
                 print(description)
-        elif description_pre2 != None:
-            description_bite_remove=description_pre2.encode(formatter=SortAttributes())
-            description_bite_remove = description_bite_remove.decode('utf8')
-            for tag in content1.find_all('meta', {'name':'dcterms.description'}):
-                description = str(tag.sourceline)+". "+str(description_bite_remove)
-                print(description)
+                error_description = ""
+                print(error_description)
         else:
-            description = "None"
+            description = ""
             print(description)
-        
+            error_description = """Required meta tag [ description ] is missing. Please review your code."""
+            print(error_description)
+
         # Search keywords
         keywords_pre = content.find('meta', {'name':'keywords'})
         if keywords_pre!= None:    
@@ -151,9 +156,13 @@ def scrape():
             for tag in content1.find_all('meta', {'name':'keywords'}):
                 keywords = str(tag.sourceline)+". "+str(keywords_bite_remove)
                 print(keywords)
+                error_keywords = ""
+                print(error_keywords)
         else:
-            keywords = "None"
+            keywords = ""
             print(keywords)
+            error_keywords = """Required meta tag [ keywords ] is missing. Please review your code."""
+            print(error_keywords)
 
         # Search scterms creator
         creator_pre = content.find('meta', {'name':'dcterms.creator'})
@@ -167,20 +176,30 @@ def scrape():
                     if str(creator_bite_remove) == creator_original_eng:
                         creator = str(tag.sourceline)+". "+str(creator_bite_remove)
                         print(creator)
+                        error_creator = ""
+                        print(error_creator)
                     else:
-                        creator = "None"
+                        creator = ""
                         print(creator)
+                        error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
+                        print(error_creator)
                 elif lang == "French":
                     if str(creator_bite_remove) == creator_original_fra:
                         creator = str(tag.sourceline)+". "+str(creator_bite_remove)
                         print(creator)
+                        error_creator = ""
+                        print(error_creator)
                     else:
-                        creator = "None"
+                        creator = ""
                         print(creator)
+                        error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
+                        print(error_creator)
         else:
-            creator = "None"
+            creator = ""
             print(creator)
-        
+            error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
+            print(error_creator)
+
         # Searching the dcterms.title
         title2_pre = content.find('meta', {'name':'dcterms.title'})
         if title2_pre!= None:
@@ -189,9 +208,13 @@ def scrape():
             for tag in content1.find_all('meta', {'name':'dcterms.title'}):
                 title2 = str(tag.sourceline)+". "+str(title2_bite_remove)
                 print(title2)
+                error_title2 =  ""
+                print(error_title2) 
         else:
-            title2 = "None"
-            print(title2)    
+            title2 = ""
+            print(title2)
+            error_title2 =  """Required meta tag [ dcterms.title ] is missing. Please review your code."""
+            print(error_title2)  
         
         # Finding date issued
         # Formatting it
@@ -210,13 +233,19 @@ def scrape():
                 for tag in content1.find_all('meta', {'name':'dcterms.issued'}):
                     date_issued = str(tag.sourceline)+". "+str(date_issued_bite_remove)
                     print(date_issued)
+                    error_dcterms_issued = ""
+                    print(error_dcterms_issued)
             else:
-                date_issued ="None"
+                date_issued =""
                 print(date_issued)
+                error_dcterms_issued = """Meta tag value for [ dcterms.issued ] appears to be in wrong format. Date fields should be in the format yyyy-mm-dd (e.g. 2020-04-29)"""
+                print(error_dcterms_issued)
         else:
-            date_issued ="None"
+            date_issued =""
             print(date_issued)
-        
+            error_dcterms_issued = """Required meta tag [ dcterms.issued ] is missing. Please review your code."""
+            print(error_dcterms_issued)
+
         # Finding the date modified
         # Formatting it
         # Checking the date formating    
@@ -235,12 +264,18 @@ def scrape():
                 for tag in content1.find_all('meta', {'name':'dcterms.modified'}):
                     date_modified = str(tag.sourceline)+". "+str(date_modified_bite_remove)
                     print(date_modified)
+                    error_dcterms_modified = ""
+                    print(error_dcterms_modified)
             else:
-                date_modified ="None"
+                date_modified =""
                 print(date_modified)
+                error_dcterms_modified = """Meta tag value for [ dcterms.modified ] appears to be in wrong format. Date fields should be in the format yyyy-mm-dd (e.g. 2020-04-29)"""
+                print(error_dcterms_modified)
         else:
-            date_modified ="None"
+            date_modified =""
             print(date_modified)
+            error_dcterms_modified = """Required meta tag [ dcterms.modified ] is missing. Please review your code."""
+            print(error_dcterms_modified)
 
         # Search for dcterms.subjects
         # Formatting it
@@ -251,9 +286,13 @@ def scrape():
             for tag in content1.find_all('meta', {'name':'dcterms.subject'}):
                 subject = str(tag.sourceline)+". "+str(subject_bite_remove)
                 print(subject)
+                error_dcterms_subject = ""
+                print(error_dcterms_subject)
         else:
-            subject = "None"
+            subject = ""
             print(subject)
+            error_dcterms_subject = """Required meta tag [ dcterms.subject ] is missing. Please review your code."""
+            print(error_dcterms_subject)
         
         #Search for the dcterms.language
         language_pre = content.find('meta', {'name':'dcterms.language'})
@@ -267,22 +306,34 @@ def scrape():
                     if str(language_bite_remove) == language_original_eng:
                         language = str(tag.sourceline)+". "+str(language_bite_remove)
                         print(language)
+                        error_dcterms_language = ""
+                        print(error_dcterms_language)
+
                     else:
-                        language = "None"
+                        language = ""
                         print(language)
+                        error_dcterms_language = """Meta tag value for [ English ] appears to be in the wrong language for the page selected. Please refer to the values in the instructions or contact the Search Solutions Unit (SSU) for assistance."""
+                        print(error_dcterms_language)
+
                 elif lang == "French":
                     if str(language_bite_remove) == language_original_fra:
                         language = str(tag.sourceline)+". "+str(language_bite_remove)
                         print(language)
+                        error_dcterms_language = ""
+                        print(error_dcterms_language)
                     else:
-                        language = "None"
+                        language = ""
                         print(language)
+                        error_dcterms_language = """Meta tag value for [ French ] appears to be in the wrong language for the page selected. Please refer to the values in the instructions or contact the Search Solutions Unit (SSU) for assistance."""
+                        print(error_dcterms_language)
                 else:
-                    language = "None"
+                    language = ""
                     print(language)
         else:
-            language = "None"
+            language = ""
             print(language)
+            error_dcterms_language = """Required meta tag [ dcterms.language ] is missing. Please review your code."""
+            print(error_dcterms_language)
 
         #find viewport
         #Validate and format it
@@ -294,12 +345,18 @@ def scrape():
                 if str(viewport_pre) == viewport_original:
                     viewport = str(tag.sourceline) + ". "+ str(viewport_pre)
                     print(viewport)
+                    error_viewport = ""
+                    print(error_viewport)
                 else:
-                    viewport = "None"
+                    viewport = ""
                     print(viewport)
+                    error_viewport = """Required meta tag [ viewport ] is missing. Please review your code."""
+                    print(error_viewport)
         else:
-            viewport = "None"
+            viewport = ""
             print(viewport)
+            error_viewport = """Required meta tag [ viewport ] is missing. Please review your code."""
+            print(error_viewport)
 
 
         #Searching for the url cononical
@@ -312,9 +369,13 @@ def scrape():
             for tag in content1.find_all('link', {'rel':'canonical'}):
                 url_canonical = str(tag.sourceline)+". "+str(url_canonical_bite_remove)
                 print(url_canonical)
+                error_canonical = ""
+                print(error_canonical)
         else:
-            url_canonical = "None"
+            url_canonical = ""
             print(url_canonical)
+            error_canonical = """No canonical tag found. Dynamic pages and high profile pages require a canonical tag. Please contact the Search Solutions Unit (SSU) to ensure the tags and values are appropriate for your page."""
+            print(error_canonical)
         
         #Searching 1st Adobe tag
         #validating it.
@@ -329,12 +390,20 @@ def scrape():
                 if service_bit_remove == service_original:
                     service = str(tag.sourceline)+". "+str(service_bit_remove)
                     print(service)
+                    error_service = ""
+                    print(error_service)
+
+
                 else:
-                    service = "None"
+                    service = ""
                     print(service)
+                    error_service = """Required Adobe Analytics meta tags [ dcterms:service ] is missing from the <head> section. Please review your code. """
+                    print(error_service)
         else:
-            service = "None"
+            service = ""
             print(service)
+            error_service = """Required Adobe Analytics meta tags [ dcterms:service ] is missing from the <head> section. Please review your code. """
+            print(error_service)
 
         #Searching 2nd Adobe tag
         #validating it.
@@ -349,12 +418,18 @@ def scrape():
                 if bit_remove == access_rights_original:
                     access_rights = str(tag.sourceline)+". "+str(bit_remove)
                     print(access_rights)
+                    error_accessRights = ""
+                    print(error_accessRights)
                 else:
-                    access_rights = "None"
+                    access_rights = ""
                     print(access_rights)
+                    error_accessRights = """Required Adobe Analytics meta tags [ dcterms:accessRights ] is missing from the <head> section. Please review your code."""
+                    print(error_accessRights)
         else:
-            access_rights = "None"
+            access_rights = ""
             print(access_rights)
+            error_accessRights = """Required Adobe Analytics meta tags [ dcterms:accessRights ] is missing from the <head> section. Please review your code."""
+            print(error_accessRights)
 
         
         #Finding the 3rd Adobe tag and validating
@@ -366,20 +441,28 @@ def scrape():
             for tag in content1.find_all('script', {'src':'https://assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'}):    
                 if  str(adobe_script) == adobe_original1:
                     adobe_third = str(tag.sourceline)+". "+str(adobe_script)
-                    print(adobe_third)   
+                    print(adobe_third) 
+                    error_adobe_third = ""
+                    print(error_adobe_third)  
         elif adobe_script2 != None:
             adobe_original2="""<script src="//assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js"></script>"""
             for tag in content1.find_all('script', {'src':'//assets.adobedtm.com/caacec67651710193d2331efef325107c23a0145/satelliteLib-c2082deaf69c358c641c5eb20f94b615dd606662.js'}):
                 if str(adobe_script2) == adobe_original2:
                     adobe_third = str(tag.sourceline)+". "+str(adobe_script2)
                     print(adobe_third)
-                else:
-                    adobe_third = "None"
-                    print(adobe_third)
-        else:
-            adobe_third = "None"
-            print(adobe_third)
+                    error_adobe_third = ""
+                    print(error_adobe_third) 
 
+                else:
+                    adobe_third = ""
+                    print(adobe_third)
+                    error_adobe_third = """Required Adobe Analytics JavaScript code is missing from the header. Please review your code. """
+                    print(error_adobe_third)
+        else:
+            adobe_third = ""
+            print(adobe_third)
+            error_adobe_third = """Required Adobe Analytics JavaScript code is missing from the header. Please review your code. """
+            print(error_adobe_third)
 
 
         #Validate the end location of the Adove tag
@@ -387,8 +470,10 @@ def scrape():
         
         adobe = content.find_all('script',{"type":"text/javascript"})
         if adobe == [] or adobe == None:
-                adobe_end_tag = "None"
+                adobe_end_tag = ""
                 print(adobe_end_tag)
+                error_adobe_end_tag = """Required Adobe Analytics JavaScript code is missing from the footer. Please review your code.  """
+                print(error_adobe_end_tag)
                 
         for tag in content1.find_all('script',{"type":"text/javascript"}):  
             if adobe !=0: 
@@ -398,14 +483,22 @@ def scrape():
                 if str(adobe_end_tag) == adobe_original:
                     adobe_end_tag = str(tag.sourceline) + ". " + str(adobe_end_tag)
                     print(adobe_end_tag)
+                    error_adobe_end_tag = ""
+                    print(error_adobe_end_tag)
                 else:
-                    adobe_end_tag = "None"
+                    adobe_end_tag = ""
                     print(adobe_end_tag)
+                    error_adobe_end_tag = """Required Adobe Analytics JavaScript code is missing from the footer. Please review your code.  """
+                    print(error_adobe_end_tag)
                     break
             else:
-                adobe_end_tag = "None"
+                adobe_end_tag = ""
                 print(adobe_end_tag)
+                error_adobe_end_tag = """Required Adobe Analytics JavaScript code is missing from the footer. Please review your code.  """
+                print(error_adobe_end_tag)
 
+        
+        ### To add line numbers to the main code snippet
         if not urlValidator:
             final_string = content_just_print
             print(final_string)       
@@ -429,7 +522,12 @@ def scrape():
                 print(final_string)
         
         # Find Old tags
-        old_title = content.find('meta', {'name':'title'})
+        old_title_pre = content.find('meta', {'name':'title'})
+        if old_title_pre !=0:
+            old_title = "Old meta tag [ title ] found. These tags are no longer in use. Please contact the Search Solutions Unit (SSU) for further instructions." 
+        else:
+            old_title = ""
+
         old_dc_title = content.find('meta', {'name':'dc.title'})
         old_dc_description = content.find('meta', {'name':'dc.description'})
         old_dcterms_description = content.find('meta', {'name':'dcterms.description'})
@@ -452,11 +550,23 @@ def scrape():
         
 
 
-        return render_template('scrape.html', content=final_string, meta = meta, title = title,
-         description = description , keywords=keywords,title2=title2,dateissued=date_issued,
-         datemodified=date_modified, creator = creator, subject= subject, language=language,
-         viewport = viewport, urlcanonical=url_canonical, service = service , accessrights =  access_rights,
-         adobescript = adobe_third, adobeendtag= adobe_end_tag ,
+        return render_template('scrape.html', content=final_string, 
+        meta = meta,
+        title = title,
+        description = description,
+        keywords=keywords,
+        title2=title2,
+        dateissued=date_issued,
+        datemodified=date_modified,
+        creator = creator,
+        subject= subject,
+        language=language,
+        viewport = viewport,
+        urlcanonical=url_canonical,
+        service = service,
+        accessrights =  access_rights,
+        adobescript = adobe_third,
+        adobeendtag= adobe_end_tag ,
         old_dc_description = old_dc_description,
         old_dcterms_description = old_dcterms_description,
         old_date =  old_date,
@@ -474,29 +584,60 @@ def scrape():
         old_STCstatus = old_STCstatus,
         old_STClist = old_STClist,
         old_STCthesaurus = old_STCthesaurus,
-        old_STCprice = old_STCprice)
+        old_STCprice = old_STCprice,
+        error_meta = error_meta,
+        error_title = error_title,
+        error_description = error_description,
+        error_keywords=error_keywords,
+        error_creator=error_creator,
+        error_title2=error_title2,
+        error_dcterms_issued=error_dcterms_issued,
+        error_dcterms_modified=error_dcterms_modified,
+        error_dcterms_subject=error_dcterms_subject,
+        error_dcterms_language=error_dcterms_language,
+        error_viewport=error_viewport,
+        error_canonical=error_canonical,
+        error_service=error_service,
+        error_accessRights=error_accessRights,
+        error_adobe_third=error_adobe_third,
+        error_adobe_end_tag=error_adobe_end_tag )
 
-    return render_template('scrape.html', content=None, meta = None, title = None, description = None ,
-     keywords=None,title2=None,dateissued=None,datemodified=None, creator =None, subject= None, language=None,
-     viewport = None, urlcanonical= None, service = None , accessrights = None, adobescript = None,
-     adobeendtag= None , old_dc_description = None,
-        old_dcterms_description = None,
-        old_date =  None,
-        old_author = None,
-        old_dc_language = None,
-        old_dc_subject = None,
-        old_dc_creator = None,
-        old_STCkeywords = None,
-        old_STCtopic = None,
-        old_STCtopicID = None,
-        old_STCsubtopic = None,
-        old_STCsubtopicID = None,
-        old_STCtype = None,
-        old_STCsource = None,
-        old_STCstatus = None,
-        old_STClist = None,
-        old_STCthesaurus = None,
-        old_STCprice = None)
+    return render_template('scrape.html',
+    content=None,
+    meta = None,
+    title = None,
+    description = None ,
+    keywords=None,
+    title2=None,
+    dateissued=None,
+    datemodified=None,
+    creator =None,
+    subject= None,
+    language=None,
+    viewport = None,
+    urlcanonical= None,
+    service = None ,
+    accessrights = None,
+    adobescript = None,
+    adobeendtag= None ,
+    old_dc_description = None,
+    old_dcterms_description = None,
+    old_date =  None,
+    old_author = None,
+    old_dc_language = None,
+    old_dc_subject = None,
+    old_dc_creator = None,
+    old_STCkeywords = None,
+    old_STCtopic = None,
+    old_STCtopicID = None,
+    old_STCsubtopic = None,
+    old_STCsubtopicID = None,
+    old_STCtype = None,
+    old_STCsource = None,
+    old_STCstatus = None,
+    old_STClist = None,
+    old_STCthesaurus = None,
+    old_STCprice = None)
 
     #try:       
       #  response = requests.get(url)
