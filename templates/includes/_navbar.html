@@ -1,4 +1,5 @@
 <!-- Render navigation bar along all the pages -->
+
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -12,23 +13,35 @@
       border-top: 16px solid #3498db;
       width: 120px;
       height: 120px;
-      -webkit-animation: spin 2s linear infinite; /* Safari */
+      -webkit-animation: spin 2s linear infinite;
+      /* Safari */
       animation: spin 2s linear infinite;
     }
-    
+
     /* Safari */
     @-webkit-keyframes spin {
-      0% { -webkit-transform: rotate(0deg); }
-      100% { -webkit-transform: rotate(360deg); }
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
     }
-    
+
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
-    </style>
+  </style>
 
 </head>
+
 <body>
   <div class="container">
     <div class="row">
@@ -36,200 +49,208 @@
         <div class="jumbotron jumbotron-fluid text-left mt-4">
           <div class="container">
             <h1 class="display-4">Meta tag validator</h1>
-            <hr class="border border-danger" width="100%"></hr>
+            <hr class="border border-danger" width="100%">
+            </hr>
             <!--<p class="lead">Web scrapping for metatag validation</p>-->
           </div>
         </div>
       </div>
     </div>
   </div>
-<div class="container">
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">URL</a></li>
-  <li><a data-toggle="tab" href="#menu1">Code</a></li>
-  <li><a data-toggle="tab" href="#menu2">Custom Web Scrapping</a></li>
-</ul>
+  <div class="container">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#home">URL</a></li>
+      <li><a data-toggle="tab" href="#menu1">Code</a></li>
+      <li><a data-toggle="tab" href="#menu2">Custom Web Scrapping</a></li>
+    </ul>
 
-<div class="tab-content">
-  <br>
-  
-  <div id="home" class="tab-pane fade in active"> 
-          
-      
-      
-      <div class="row">
-        <div class="col">
-          <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-              <form  action="/scrape">
-                <h4>Select Language of page being tested:</h4> 
-                <div class="radio" action="/scrape">
-                  <label>
-                    <h4><input type="radio" name="lang" id="anynum" value= "English">English</h4>
-                  </label>&nbsp;&nbsp;
-                  <label>
-                    <h4><input type="radio" name="lang" id="issuenum" value= "French">French</h4>
-                  </label>
-                </div>
-                <h3>URL</h3>
-                <input class="form-control mr-sm-2" type="text" placeholder="Enter a URL to test." name="url"><br>            
-                <button class="btn btn-primary my-2 my-sm-0" type="submit">Test</button>
-              </form>
-            </div>
-          </nav>
-        </div>
-      </div>
-    
-  
-  </div>
-  <div id="menu1" class="tab-pane fade">
-    
-      <div class="row">
-        <div class="col">
-          <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-              <form action="/scrape">
-                <h4>Select Language of page being tested:</h4> 
-                <div class="radio" action="/scrape">
-                  <label>
-                    <h4><input type="radio" name="lang" id="anynum" value= "English" required>English</h4>
-                  </label>&nbsp;&nbsp;
-                  <label>
-                    <h4><input type="radio" name="lang" id="issuenum" value= "French" required>French</h4>
-                  </label>
-                </div>
-                <h3>CODE</h3>
-                <input class="form-control mr-sm-2" type="text" placeholder="Paste a Code to test." name="url" style="height:110px;width:800px;" required> 
-                <br>           
-                <button class="btn btn-primary my-2 my-sm-0" onclick="$('#loading').show();" type="submit">Test Code</button>
-              </form>
-              <div class="loader" id="loading" style="display:none;"><img src="loading.gif" alt="" /></div>
-            </div>
-          </nav>
-        </div>
-      </div>
-    
-  </div>
-  <div id="menu2" class="tab-pane fade">
-    <h3>Custom</h3>
-    <div class="container">
-      <div class="row">
-        <!-- HTML response view -->
-        <div class="col-8">
-          <div class="form-group">
-            <textarea class="form-control mt-2" id="htmlResponse" rows="32">{{ content }}</textarea>
-          </div>
-        </div>
-        
-        <!-- Extract data view -->
-        <div class="col">
-          
-          <!-- Add tag card -->
-          <div class="card mt-2">
-            <div class="card-body">
-              
-              <!-- Filter tags -->
-              <div class="form-group">
-                
-                <!-- Tag name -->
-                <input type="text" class="form-control" id="tag" placeholder="Add tag name to filter content by...">              
-                
-                <!-- CSS class -->
-                <input type="text" class="form-control mt-2" id="css" placeholder="Add CSS Class to filter tag by...">
-  
-                <!-- Attributes -->
-                <input type="text" class="form-control mt-2" id="attr" placeholder="Add attributes to filter tag by...">
-  
+    <div class="tab-content">
+      <br>
+
+      <div id="home" class="tab-pane fade in active">
+
+
+
+        <div class="row">
+          <div class="col">
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+              <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <form action="/scrape">
+                  <h4>Select Language of page being tested:</h4>
+                  <div class="radio" action="/scrape">
+                    <label>
+                      <h4><input type="radio" name="lang" id="anynum" value="English">English</h4>
+                    </label>&nbsp;&nbsp;
+                    <label>
+                      <h4><input type="radio" name="lang" id="issuenum" value="French">French</h4>
+                    </label>
+                  </div>
+                  <input class="form-control mr-sm-2" type="text" placeholder="Enter a URL to test." name="url"><br>
+                  <button class="btn btn-primary my-2 my-sm-0" type="submit">Test</button>
+                </form>
+                <button onclick="location.href='http://127.0.0.1:5000/'" type="button">
+                  Home</button>
               </div>
-              
-              <!-- Add button -->
-              <button class="btn btn-primary mt-2 col-sm" onclick="add_tag()">Add</button>
-            </div>
+            </nav>
           </div>
-        
-          <form action="/results">
-            <!-- Hiden input to store current URL -->
-            <input type="text" value="{{request.args.get('url')}}" name="url" hidden>
-    
-            <!-- Tag table-->
-            <table class="table mt-3" id="tags">
-              <thead>
-                <tr>
-                  <th scope="col">Tag Name</th>
-                  <th scope="col">CSS Class</th>
-                  <th scope="col">Attribute</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-            
-            <!--  Search for tags -->
-            <div class="col"><button class="btn btn-success col-sm-10" type='submit'>Scrape</button></div>
-            
-          </form>
-  
+        </div>
+
+
+      </div>
+      <div id="menu1" class="tab-pane fade">
+        <div class="row">
+          <div class="col">
+            <div class="overflow-auto">
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+              <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <form action="/scrape">
+                  <h4>Select Language of page being tested:</h4>
+                  <div class="radio" action="/scrape">
+                    <label>
+                      <h4><input type="radio" name="lang" id="anynum" value="English" required>English</h4>
+                    </label>&nbsp;&nbsp;
+                    <label>
+                      <h4><input type="radio" name="lang" id="issuenum" value="French" required>French</h4>
+                    </label>
+                  </div>
+                  
+                    <textarea overflow="scroll" class="form-control mr-sm-2" type="text"
+                      placeholder="Paste a Code to test." name="url" style="height:110px;width:800px;" required></textarea>
+                    <br> 
+                  <button class="btn btn-primary my-2 my-sm-0" onclick="$('#loading').show();" type="submit">Test
+                    Code</button>
+                </form>
+                <button onclick="location.href='http://127.0.0.1:5000/'" type="button">
+                  Home</button>
+                <div class="loader" id="loading" style="display:none;"><img src="loading.gif" alt="" /></div>
+              </div>
+            </nav>
+          </div>
         </div>
       </div>
+
+      </div>
+      <div id="menu2" class="tab-pane fade">
+        <h3>Custom</h3>
+        <div class="container">
+          <div class="row">
+            <!-- HTML response view -->
+            <div class="col-8">
+              <div class="form-group">
+                <textarea class="form-control mt-2" id="htmlResponse" rows="32">{{ content }}</textarea>
+              </div>
+            </div>
+
+            <!-- Extract data view -->
+            <div class="col">
+
+              <!-- Add tag card -->
+              <div class="card mt-2">
+                <div class="card-body">
+
+                  <!-- Filter tags -->
+                  <div class="form-group">
+
+                    <!-- Tag name -->
+                    <input type="text" class="form-control" id="tag" placeholder="Add tag name to filter content by...">
+
+                    <!-- CSS class -->
+                    <input type="text" class="form-control mt-2" id="css"
+                      placeholder="Add CSS Class to filter tag by...">
+
+                    <!-- Attributes -->
+                    <input type="text" class="form-control mt-2" id="attr"
+                      placeholder="Add attributes to filter tag by...">
+
+                  </div>
+
+                  <!-- Add button -->
+                  <button class="btn btn-primary mt-2 col-sm" onclick="add_tag()">Add</button>
+                </div>
+              </div>
+
+              <form action="/results">
+                <!-- Hiden input to store current URL -->
+                <input type="text" value="{{request.args.get('url')}}" name="url" hidden>
+
+                <!-- Tag table-->
+                <table class="table mt-3" id="tags">
+                  <thead>
+                    <tr>
+                      <th scope="col">Tag Name</th>
+                      <th scope="col">CSS Class</th>
+                      <th scope="col">Attribute</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                </table>
+
+                <!--  Search for tags -->
+                <div class="col"><button class="btn btn-success col-sm-10" type='submit'>Scrape</button></div>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+          // row count holder
+          var row_count = -1;
+
+          // add tag to scrape
+          function add_tag() {
+            tag = document.getElementById("tag");
+            css = document.getElementById("css");
+            attr = document.getElementById("attr");
+            table = document.getElementById("tags");
+
+            // Add values to cells
+            if (tag.value) {
+              var row = table.insertRow(1);
+              row.id = row_count++
+
+              var cell_tag = row.insertCell(0);
+              var cell_css = row.insertCell(1);
+              var cell_attr = row.insertCell(2);
+              var del = row.insertCell(3);
+
+              cell_tag.innerHTML = "<input class='form-control' type='text' " +
+                "value='" + tag.value + "' name='tag'/>";
+
+              cell_css.innerHTML = "<input class='form-control' type='text' " +
+                "value='" + css.value + "' name='css'/>";
+
+              cell_attr.innerHTML = "<input class='form-control' type='text' " +
+                "value='" + attr.value + "' name='attr'/>"
+
+              del.innerHTML = "<button class='btn btn-primary' type='button' onclick='del_tag(this.parentElement.parentElement.id)'>x</button>"
+
+
+              tag.value = '';
+              css.value = '';
+              attr.value = '';
+
+            }
+            else
+              alert('You need at least to specify the tag name!')
+          }
+
+          // delete tag to scrape
+          function del_tag(row_id) {
+            var table = document.getElementById("tags");
+            var row = document.getElementById(row_id);
+
+            table.deleteRow(row.rowIndex)
+          }
+
+        </script>
+      </div>
+
+
+
     </div>
-    
-    <script type="text/javascript">
-      // row count holder
-      var row_count = -1;
-      
-      // add tag to scrape
-      function add_tag() {
-        tag = document.getElementById("tag");
-        css = document.getElementById("css");
-        attr = document.getElementById("attr");
-        table = document.getElementById("tags");
-  
-        // Add values to cells
-        if (tag.value) {
-          var row = table.insertRow(1);
-          row.id = row_count++
-  
-          var cell_tag = row.insertCell(0);
-          var cell_css = row.insertCell(1);
-          var cell_attr = row.insertCell(2);
-          var del = row.insertCell(3);
-  
-          cell_tag.innerHTML = "<input class='form-control' type='text' " +
-                               "value='" + tag.value + "' name='tag'/>";
-  
-          cell_css.innerHTML = "<input class='form-control' type='text' " +
-                               "value='" + css.value + "' name='css'/>";
-  
-          cell_attr.innerHTML = "<input class='form-control' type='text' " +
-                               "value='" + attr.value + "' name='attr'/>"
-  
-          del.innerHTML = "<button class='btn btn-primary' type='button' onclick='del_tag(this.parentElement.parentElement.id)'>x</button>"
-  
-          
-          tag.value = '';
-          css.value = '';
-          attr.value = '';
-  
-        }
-        else
-          alert('You need at least to specify the tag name!')
-      }
-      
-      // delete tag to scrape
-      function del_tag(row_id) {
-        var table = document.getElementById("tags");
-        var row = document.getElementById(row_id);
-        
-        table.deleteRow(row.rowIndex)
-      }
-      
-    </script>
   </div>
-
-
-
-</div>
-</div>
 </body>
- 
