@@ -151,8 +151,7 @@ def scrape():
                 formatter=SortAttributes())
             description_bite_remove = description_bite_remove.decode('utf8')
             for tag in content1.find_all('meta', {'name': 'description'}):
-                description = str(tag.sourceline)+". " + \
-                    str(description_bite_remove)
+                description = str(tag.sourceline)+". " +str(description_bite_remove)
                 print(description)
                 error_description = ""
                 print(error_description)
@@ -198,8 +197,7 @@ def scrape():
             for tag in content1.find_all('meta', {'name': 'dcterms.creator'}):
                 if lang == "English":
                     if str(creator_bite_remove) == creator_original_eng:
-                        creator = str(tag.sourceline)+". " + \
-                            str(creator_bite_remove)
+                        creator = str(tag.sourceline)+". " +str(creator_bite_remove)
                         print(creator)
                         error_creator = ""
                         print(error_creator)
@@ -214,8 +212,7 @@ def scrape():
                         print(creator_validation)
                 elif lang == "French":
                     if str(creator_bite_remove) == creator_original_fra:
-                        creator = str(tag.sourceline)+". " + \
-                            str(creator_bite_remove)
+                        creator = str(tag.sourceline)+". " +str(creator_bite_remove)
                         print(creator)
                         error_creator = ""
                         print(error_creator)
@@ -272,8 +269,7 @@ def scrape():
             validating_date_issued = validate(finding_date)
             if validating_date_issued == True:
                 for tag in content1.find_all('meta', {'name': 'dcterms.issued'}):
-                    date_issued = str(tag.sourceline)+". " + \
-                        str(date_issued_bite_remove)
+                    date_issued = str(tag.sourceline)+". " +str(date_issued_bite_remove)
                     print(date_issued)
                     error_dcterms_issued = ""
                     print(error_dcterms_issued)
@@ -312,8 +308,7 @@ def scrape():
             validating_date = validate(finding_date)
             if validating_date == True:
                 for tag in content1.find_all('meta', {'name': 'dcterms.modified'}):
-                    date_modified = str(tag.sourceline) + \
-                        ". "+str(date_modified_bite_remove)
+                    date_modified = str(tag.sourceline) +". "+str(date_modified_bite_remove)
                     print(date_modified)
                     error_dcterms_modified = ""
                     print(error_dcterms_modified)
@@ -362,8 +357,7 @@ def scrape():
             for tag in content1.find_all('meta', {'name': 'dcterms.language'}):
                 if lang == "English":
                     if str(language_bite_remove) == language_original_eng:
-                        language = str(tag.sourceline)+". " + \
-                            str(language_bite_remove)
+                        language = str(tag.sourceline)+". " +str(language_bite_remove)
                         print(language)
                         error_dcterms_language = ""
                         print(error_dcterms_language)
@@ -378,8 +372,7 @@ def scrape():
 
                 elif lang == "French":
                     if str(language_bite_remove) == language_original_fra:
-                        language = str(tag.sourceline)+". " + \
-                            str(language_bite_remove)
+                        language = str(tag.sourceline)+". " +str(language_bite_remove)
                         print(language)
                         error_dcterms_language = ""
                         print(error_dcterms_language)
@@ -436,8 +429,7 @@ def scrape():
             url_canonical_bite_remove = url_canonical_bite_remove.decode(
                 'utf8')
             for tag in content1.find_all('link', {'rel': 'canonical'}):
-                url_canonical = str(tag.sourceline)+". " + \
-                    str(url_canonical_bite_remove)
+                url_canonical = str(tag.sourceline)+". " +str(url_canonical_bite_remove)
                 print(url_canonical)
                 error_canonical = ""
                 print(error_canonical)
@@ -447,6 +439,35 @@ def scrape():
             error_canonical = """No canonical tag found. Dynamic pages and high profile pages require a canonical tag. Please contact the Search Solutions Unit (SSU) to ensure the tags and values are appropriate for your page."""
             print(error_canonical)
 
+        # Search For Robots tag
+        # Finding within the script
+        # Adding line number and formatting it
+
+        robots_pre = content.find('meta', {'name': 'robots'})
+        if robots_pre != None:
+            robots_bite_remove = robots_pre.encode(
+                formatter=SortAttributes())
+            robots_bite_remove = robots_bite_remove.decode('utf8')
+            for tag in content1.find_all('meta', {'name': 'robots'}):
+                robots = str(tag.sourceline)+". " +str(robots_bite_remove)
+                print(robots)
+                error_robots = ""
+                print(error_robots)
+                robots_validation = "Yes01"
+                print(robots_validation)
+        else:
+            robots = ""
+            print(robots)
+            robots_validation = ""
+            print(robots_validation)
+            error_robots = """Required meta tag [ robots ] is missing. Please review your code."""
+            print(error_robots)
+
+
+
+        ##########################################      
+        # ADOBE
+        ##########################################
         # Searching 1st Adobe tag
         # validating it.
         service_pre = content.find('meta', {'property': 'dcterms:service'})
@@ -551,8 +572,7 @@ def scrape():
                 adobe_end_tag = (adobe[x])
                 adobe_original = """<script type="text/javascript">_satellite.pageBottom();</script>"""
                 if str(adobe_end_tag) == adobe_original:
-                    adobe_end_tag = str(tag.sourceline) + \
-                        ". " + str(adobe_end_tag)
+                    adobe_end_tag = str(tag.sourceline) +". " + str(adobe_end_tag)
                     print(adobe_end_tag)
                     error_adobe_end_tag = ""
                     print(error_adobe_end_tag)
@@ -584,7 +604,7 @@ def scrape():
                 list_pre = []
                 final_string = []
                 for i, line in enumerate(f, start=1):
-                    first_list = '{}  {}'.format(i, line.strip())
+                    first_list = '{}.  {}'.format(i, line.strip())
                     list_pre.append(first_list)
 
                 final_string = '\n'.join(list_pre)
@@ -726,6 +746,7 @@ def scrape():
                                language=language,
                                viewport=viewport,
                                urlcanonical=url_canonical,
+                               robots=robots,
                                service=service,
                                accessrights=access_rights,
                                adobescript=adobe_third,
@@ -762,6 +783,7 @@ def scrape():
                                error_dcterms_language=error_dcterms_language,
                                error_viewport=error_viewport,
                                error_canonical=error_canonical,
+                               error_robots=error_robots,
                                error_service=error_service,
                                error_accessRights=error_accessRights,
                                error_adobe_third=error_adobe_third,
