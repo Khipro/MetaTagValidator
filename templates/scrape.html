@@ -146,19 +146,44 @@ old_STCprice ==""
   <div class="card-body text-primary">
     <h5 class="card-title"></h5>
     <p class="card-text">
-      {{meta}}<br>
-      {{ title}}<br>
-      {{description}}<br>
-      {{keywords}}<br>
-      {{creator}}<br>
-      {{title2}}<br>
-      {{dateissued}}<br>
-      {{datemodified}}<br>
-      {{subject}}<br>
-      {{language}}<br>
-      {{viewport}}<br>
-      {{urlcanonical}}<br>
-      {{robots}}
+      {% if meta %} {{meta}}<br> {% else %} {% endif %}
+     
+
+      {% if title %} {{title}}<br> {% else %} {% endif %}
+     
+
+      {% if description %} {{description}}<br> {% else %} {% endif %}
+     
+
+      {% if keywords %} {{keywords}}<br> {% else %} {% endif %}
+     
+
+      {% if creator %} {{creator}}<br> {% else %} {% endif %}
+     
+
+      {% if title2 %} {{title2}}<br> {% else %} {% endif %}
+     
+
+      {% if dateissued %} {{dateissued}}<br> {% else %} {% endif %}
+     
+
+      {% if datemodified %} {{datemodified}}<br> {% else %} {% endif %}
+     
+
+      {% if subject %} {{subject}}<br> {% else %} {% endif %}
+     
+
+      {% if language %} {{language}}<br> {% else %} {% endif %}
+     
+
+      {% if viewport %} {{viewport}}<br> {% else %} {% endif %}
+     
+
+      {% if urlcanonical %} {{urlcanonical}}<br> {% else %} {% endif %}
+     
+
+      {% if robots %} {{robots}}<br> {% else %} {% endif %}
+
     </p> 
   </div>
 </div>
@@ -180,16 +205,35 @@ old_STCprice ==""
       <div class="card-body text-primary">
         <h5 class="card-title"></h5>
         <p class="card-text">
-          {{error_meta}}<br>
-          {{error_title}}<br>
-          {{error_description}}<br>
-          {{error_keywords}}<br>
-          {{error_creator}}<br>
-          {{error_title2}}<br>
-          {{error_dcterms_issued}}<br>
-          {{error_dcterms_modified}}<br>
-          {{error_dcterms_subject}}<br>
-          {{error_dcterms_language}}<br>
+          {% if error_meta %} {{error_meta}}<br> {% else %} {% endif %}
+          
+
+          {% if error_title %} {{error_title}}<br> {% else %} {% endif %}
+          
+
+          {% if error_description %} {{error_description}}<br> {% else %} {% endif %}
+          
+
+          {% if error_keywords %} {{error_keywords}}<br> {% else %} {% endif %}
+          
+
+          {% if error_creator %} {{error_creator}}<br> {% else %} {% endif %}
+          
+
+          {% if error_title2 %} {{error_title2}}<br> {% else %} {% endif %}
+          
+
+          {% if error_dcterms_issued %} {{error_dcterms_issued}}<br> {% else %} {% endif %}
+          
+
+          {% if error_dcterms_modified %} {{error_dcterms_modified}}<br> {% else %} {% endif %}
+          
+
+          {% if error_dcterms_subject %} {{error_dcterms_subject}}<br> {% else %} {% endif %}
+          
+
+          {% if error_dcterms_language %} {{error_dcterms_language}}<br> {% else %} {% endif %}
+          
         </p>
       </div>
     </div>
