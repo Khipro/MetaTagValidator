@@ -451,7 +451,7 @@ def scrape():
             for tag in content1.find_all('meta', {'name': 'robots'}):
                 robots = str(tag.sourceline)+". " +str(robots_bite_remove)
                 print(robots)
-                error_robots = ""
+                error_robots = """Robots meta tag found. The use of robots tags are restricted to pages approved by the Search Solutions Unit (SSU). Please contact the SSU to ensure the tags and values are appropriate for your page."""
                 print(error_robots)
                 robots_validation = "Yes01"
                 print(robots_validation)
@@ -460,7 +460,7 @@ def scrape():
             print(robots)
             robots_validation = ""
             print(robots_validation)
-            error_robots = """Required meta tag [ robots ] is missing. Please review your code."""
+            error_robots = ""
             print(error_robots)
 
 

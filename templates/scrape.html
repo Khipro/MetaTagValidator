@@ -97,6 +97,8 @@ error_dcterms_modified=="" and
 error_dcterms_subject=="" and
 error_dcterms_language=="" and
 error_viewport=="" and
+error_canonical==""and
+error_robots!="""Robots meta tag found. The use of robots tags are restricted to pages approved by the Search Solutions Unit (SSU). Please contact the SSU to ensure the tags and values are appropriate for your page.""" and
 old_title =="" and
 old_dc_title =="" and
 old_dc_description  =="" and
@@ -197,6 +199,7 @@ old_STCprice ==""
 <div>
   {% if 
   error_canonical!="" or
+  error_robots !="" or
   old_title !="" or
   old_dc_title !="" or
   old_dc_description  !="" or
@@ -224,50 +227,70 @@ old_STCprice ==""
   <div class="card-body text-primary">
     <h5 class="card-title"></h5>
     <p class="card-text">
-      {{error_canonical }}<br>
-      {{old_title }}<br>
-      {{old_dc_title }}<br>
-      {{old_dc_description  }}<br>
-      {{old_dcterms_description  }}<br>
-      {{old_date }}<br>
-      {{old_author  }}<br>
-      {{old_dc_language  }}<br>
-      {{old_dc_subject }}<br>
-      {{old_dc_creator }}<br>
-      {{old_STCkeywords }}<br>
-      {{old_STCtopic }}<br>
-      {{old_STCtopicID }}<br>
-      {{old_STCsubtopic }}<br>
-      {{old_STCsubtopicID }}<br>
-      {{old_STCtype }}<br>
-      {{old_STCsource }}<br>
-      {{old_STCstatus }}<br>
-      {{old_STClist }}<br>
-      {{old_STCthesaurus }}<br>
-      {{old_STCprice }}<br>
+      {% if error_viewport %} {{error_viewport}}<br> {% else %} {% endif %}
+
+      {% if error_robots %} {{error_robots}}<br> {% else %} {% endif %}
+      
+      {% if error_canonical %} {{error_canonical}}<br> {% else %} {% endif %}
+      
+      {% if old_title %} {{old_title}}<br> {% else %} {% endif %}
+     
+      {% if old_dc_title %} {{old_dc_title}}<br> {% else %} {% endif %}
+     
+      {% if old_dc_description %} {{old_dc_description}}<br> {% else %} {% endif %}
+     
+      {% if old_dcterms_description %} {{old_dcterms_description}}<br> {% else %} {% endif %}
+     
+      {% if old_date %} {{old_date}}<br> {% else %} {% endif %}
+     
+      {% if old_author %} {{old_author}}<br> {% else %} {% endif %}
+      
+      {% if old_dc_language %} {{old_dc_language}}<br> {% else %} {% endif %}
+      
+      {% if old_dc_subject %} {{old_dc_subject}}<br> {% else %} {% endif %}
+      
+      {% if old_dc_creator %} {{old_dc_creator}}<br> {% else %} {% endif %}
+      
+      {% if old_STCkeywords %} {{old_STCkeywords}}<br> {% else %} {% endif %}
+      
+      {% if old_STCtopic %} {{old_STCtopic}}<br> {% else %} {% endif %}
+     
+      {% if old_STCtopicID %} {{old_STCtopicID}}<br> {% else %} {% endif %}
+      
+      {% if old_STCsubtopic %} {{old_STCsubtopic}}<br> {% else %} {% endif %}
+      
+      {% if old_STCsubtopicID %} {{old_STCsubtopicID}}<br> {% else %} {% endif %}
+      
+      {% if old_STCtype %} {{old_STCtype}}<br> {% else %} {% endif %}
+      
+      {% if old_STCsource %} {{old_STCsource}}<br> {% else %} {% endif %}
+      
+      {% if old_STCstatus %} {{old_STCstatus}}<br> {% else %} {% endif %}
+      
+      {% if old_STClist %} {{old_STClist}}<br> {% else %} {% endif %}
+      
+      {% if old_STCthesaurus %} {{old_STCthesaurus}}<br> {% else %} {% endif %}
+     
+      {% if old_STCprice %} {{old_STCprice}}<br> {% else %} {% endif %}
+      
       </p>
   </div>
 </div>
 {% endif %}
 </div>
-{% if error_robots %} {{error_robots}} {% else %} &nbsp; {% endif %}
 <div>
-  
   <div class="card border-primary mb-3" style="max-width: auto;">
     <div class="bg-primary text-white">
     <div class="card-header">Info</div></div>
     <div class="card-body text-primary">
       <h5 class="card-title">For assistance regarding meta tags or search, please email the Search Solutions Unit (SSU) at (statcan.diss-searchsolutionsunit-diff-sous-sectiondessolutionsderechercheweb.statcan@canada.ca).
       </h5>
-      <p class="card-text">
-        {% if error_viewport %} {{error_viewport}}<br> {% else %} {% endif %}
-        {% if error_robots %} {{error_robots}} {% else %} {% endif %}
+      <p class="card-text"> 
         <!--<tr>{{error_viewport}}<br></tr>
         <tr></tr>{{error_robots}}<br></tr>-->
       </p>
     </div>
   </div>
-
 </div>
 
 
