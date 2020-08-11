@@ -2,6 +2,8 @@
 
 {% block body %}
 
+
+
 <!-- Results Heading-->
 <div class="container">
   <div class="row">
@@ -248,7 +250,7 @@ old_STCprice ==""
 </div>
 {% endif %}
 </div>
-
+{% if error_robots %} {{error_robots}} {% else %} &nbsp; {% endif %}
 <div>
   
   <div class="card border-primary mb-3" style="max-width: auto;">
@@ -258,7 +260,10 @@ old_STCprice ==""
       <h5 class="card-title">For assistance regarding meta tags or search, please email the Search Solutions Unit (SSU) at (statcan.diss-searchsolutionsunit-diff-sous-sectiondessolutionsderechercheweb.statcan@canada.ca).
       </h5>
       <p class="card-text">
-        {{error_viewport}}<br>{{error_robots}}<br>
+        {% if error_viewport %} {{error_viewport}}<br> {% else %} {% endif %}
+        {% if error_robots %} {{error_robots}} {% else %} {% endif %}
+        <!--<tr>{{error_viewport}}<br></tr>
+        <tr></tr>{{error_robots}}<br></tr>-->
       </p>
     </div>
   </div>
@@ -320,10 +325,14 @@ error_adobe_end_tag==""
   <div class="card-body text-primary">
     <h5 class="card-title"></h5>
     <p class="card-text">
-      {{error_service}}<br>
+      {% if error_service %} {{error_service}}<br> {% else %} {% endif %}
+      {% if error_accessRights %} {{error_accessRights}}<br> {% else %} {% endif %}
+      {% if error_adobe_third %} {{error_adobe_third}}<br> {% else %} {% endif %}
+      {% if error_adobe_end_tag %} {{error_adobe_end_tag}} {% else %} {% endif %}
+      <!--{{error_service}}<br>
       {{error_accessRights}}<br>
       {{error_adobe_third}}<br>
-      {{error_adobe_end_tag}}<br>
+      {{error_adobe_end_tag}}<br>-->
     </p>
   </div>
 </div>

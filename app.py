@@ -406,7 +406,7 @@ def scrape():
                 if str(viewport_pre) == viewport_original:
                     viewport = str(tag.sourceline) + ". " + str(viewport_pre)
                     print(viewport)
-                    error_viewport = ""
+                    error_viewport = ''
                     print(error_viewport)
                 else:
                     viewport = ""
