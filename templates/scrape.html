@@ -207,31 +207,22 @@ old_STCprice ==""
         <p class="card-text">
           {% if error_meta %} {{error_meta}}<br> {% else %} {% endif %}
           
-
           {% if error_title %} {{error_title}}<br> {% else %} {% endif %}
           
-
           {% if error_description %} {{error_description}}<br> {% else %} {% endif %}
           
-
           {% if error_keywords %} {{error_keywords}}<br> {% else %} {% endif %}
           
-
           {% if error_creator %} {{error_creator}}<br> {% else %} {% endif %}
           
-
           {% if error_title2 %} {{error_title2}}<br> {% else %} {% endif %}
           
-
           {% if error_dcterms_issued %} {{error_dcterms_issued}}<br> {% else %} {% endif %}
           
-
           {% if error_dcterms_modified %} {{error_dcterms_modified}}<br> {% else %} {% endif %}
           
-
           {% if error_dcterms_subject %} {{error_dcterms_subject}}<br> {% else %} {% endif %}
           
-
           {% if error_dcterms_language %} {{error_dcterms_language}}<br> {% else %} {% endif %}
           
         </p>
@@ -363,20 +354,28 @@ error_adobe_end_tag==""
 </div>
 
 
-
+{% if 
+  service!="" or
+  accessRights!="" or
+  adobe_third!="" or
+  adobe_end_tag!="" 
+  %}
 <div class="card border-secondary mb-3" style="max-width: auto;">
   <div class="bg-secondary text-white">
   <div class="card-header">Adobe tag tested</div></div>
   <div class="card-body text-primary">
     <h5 class="card-title"></h5>
     <p class="card-text">
-      {{service}}<br>
-      {{accessrights}}<br>
-      {{adobescript}}<br>
-      {{adobeendtag}}</p>
+      {% if service %} {{service}}<br> {% else %} {% endif %}
+      
+      {% if accessrights %} {{accessrights}}<br> {% else %} {% endif %}
+      
+      {% if adobescript %} {{adobescript}}<br> {% else %} {% endif %}
+  
+      {% if adobeendtag %} {{adobeendtag}}<br> {% else %} {% endif %}
   </div>
 </div>
-
+{% endif %}
 
 
 <div>
