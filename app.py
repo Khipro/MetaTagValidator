@@ -102,6 +102,7 @@ def scrape():
 
         else:
             content1_pre = requests.get(code)
+            print_code = code
             content1 = BeautifulSoup(content1_pre.text, 'html.parser')
             content_pre = requests.get(code)
             content = BeautifulSoup(content_pre.text, 'lxml')
@@ -733,7 +734,8 @@ def scrape():
         else:
             old_STCprice = ""
 
-        return render_template('scrape.html', content=final_string,
+        return render_template('scrape.html', print_code= print_code,
+                               content=final_string,
                                meta=meta,
                                title=title,
                                description=description,
@@ -800,6 +802,7 @@ def scrape():
                                language_validation=language_validation)
 
     return render_template('scrape.html',
+                           print_code =None,
                            content=None,
                            meta=None,
                            title=None,
