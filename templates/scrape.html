@@ -52,12 +52,28 @@
                       <div class="card-body">
                         <textarea class="form-control mt-2" id="htmlResponse" rows="24">{{content }}</textarea>
                       </div>
-                      {% if print_code %} {{print_code}}<br> {% else %} {% endif %}
                     </div>
+                    
                 </div> 
               </div>
             </div>
           </body>
+          {% if print_code %}
+          
+            <div class="row">
+              <div class="col">
+                <div class="jumbotron jumbotron-fluid text-left mt-4">
+                  <div class="container">
+                <h4>The URL being tested</h4> 
+            {{print_code}}<br> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          {% else %}
+
+          {% endif %}
           
       </div>
     </div>

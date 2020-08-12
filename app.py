@@ -99,6 +99,7 @@ def scrape():
             content_just_print = BeautifulSoup(code, 'lxml').prettify()
             content1 = BeautifulSoup(code, 'lxml')
             content = BeautifulSoup(code, 'lxml')
+            print_code= None
 
         else:
             content1_pre = requests.get(code)
