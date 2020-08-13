@@ -96,14 +96,61 @@ def scrape():
         urlValidator = re.match(regex, code) is not None
 
         if not urlValidator:
-            content_just_print = BeautifulSoup(code, 'lxml').prettify()
-            content1 = BeautifulSoup(code, 'lxml')
-            content = BeautifulSoup(code, 'lxml')
+            #This Variable is assigned add line numbers to the code
+            content_just_print = code
+
+            with open('\\Users\\KIPandSHREE\\Documents\\test1.txt', 'w') as file:
+                file.write(content_just_print)
+
+            path = "\\Users\\KIPandSHREE\\Documents\\test1.txt"
+            file_path = str(path)
+
+            with open(file_path, 'r') as f:
+                list_pre = []
+                final_string = []
+                for i, line in enumerate(f, start=1):
+                    first_list = '{}.  {}'.format(i, line.strip())
+                    list_pre.append(first_list)
+
+                final_string = '\n'.join(list_pre)
+                print(final_string)
+
+
+
+
+            #This is to find the tagline number position within the original code 
+            content1 = BeautifulSoup(final_string, 'lxml')
+            content = BeautifulSoup(final_string, 'lxml')
+            # This is to print the URL that is being tested (Only for URL input)
             print_code= None
 
         else:
+            # This Variable is assigned add line numbers to the code
             content1_pre = requests.get(code)
+
+            # To add line numbers to the URL page source
+            with open('\\Users\\KIPandSHREE\\Documents\\test1.txt', 'w') as file:
+                file.write(content1_pre.text)
+
+            path = "\\Users\\KIPandSHREE\\Documents\\test1.txt"
+            file_path = str(path)
+
+            with open(file_path, 'r') as f:
+                list_pre = []
+                final_string = []
+                for i, line in enumerate(f, start=1):
+                    first_list = '{}.  {}'.format(i, line.strip())
+                    list_pre.append(first_list)
+
+                final_string = '\n'.join(list_pre)
+                print(final_string)
+
+
+
+
+            # This is to print the URL that is being tested (Only for URL input)
             print_code = code
+            #This is to find the tagline number position within the original code 
             content1 = BeautifulSoup(content1_pre.text, 'html.parser')
             content_pre = requests.get(code)
             content = BeautifulSoup(content_pre.text, 'lxml')
@@ -590,10 +637,26 @@ def scrape():
                 error_adobe_end_tag = """Required Adobe Analytics JavaScript code is missing from the footer. Please review your code.  """
                 print(error_adobe_end_tag)
 
-        # To add line numbers to the main code snippet
+        """# To add line numbers to the main code snippet
         if not urlValidator:
-            final_string = content_just_print
-            print(final_string)
+            #final_string = content_just_print
+            #print(final_string)
+
+            with open('\\Users\\KIPandSHREE\\Documents\\test1.txt', 'w') as file:
+                file.write(content_just_print)
+
+            path = "\\Users\\KIPandSHREE\\Documents\\test1.txt"
+            file_path = str(path)
+
+            with open(file_path, 'r') as f:
+                list_pre = []
+                final_string = []
+                for i, line in enumerate(f, start=1):
+                    first_list = '{}.  {}'.format(i, line.strip())
+                    list_pre.append(first_list)
+
+                final_string = '\n'.join(list_pre)
+                print(final_string)
 
         else:
             with open('\\Users\\KIPandSHREE\\Documents\\test1.txt', 'w') as file:
@@ -610,7 +673,7 @@ def scrape():
                     list_pre.append(first_list)
 
                 final_string = '\n'.join(list_pre)
-                print(final_string)
+                print(final_string)"""
 
         # Find Old tags
         old_title_pre = content.find('meta', {'name': 'title'})
