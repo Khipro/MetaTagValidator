@@ -119,7 +119,7 @@ def scrape():
 
 
             #This is to find the tagline number position within the original code 
-            content1 = BeautifulSoup(final_string, 'lxml')
+            content1 = BeautifulSoup(final_string, 'html.parser')
             content = BeautifulSoup(final_string, 'lxml')
             # This is to print the URL that is being tested (Only for URL input)
             print_code= None
@@ -144,8 +144,6 @@ def scrape():
 
                 final_string = '\n'.join(list_pre)
                 print(final_string)
-
-
 
 
             # This is to print the URL that is being tested (Only for URL input)
