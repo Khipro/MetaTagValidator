@@ -125,7 +125,8 @@ def scrape():
             print_code= None
 
         else:
-            # This Variable is assigned add line numbers to the code
+            # This Variable is assigned to add line numbers to the code later
+            # requests the page source
             content1_pre = requests.get(code)
 
             # To add line numbers to the URL page source
@@ -170,7 +171,7 @@ def scrape():
             print(meta)
             meta_validation = ""
             print(meta_validation)
-            error_meta = """Required meta tag [ <meta charset="utf-8"/> ] is missing. Please review your code."""
+            error_meta = """The attribute for meta tag [ <meta charset="utf-8"/> ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_meta)
 
         # Search and add line number to title
@@ -188,7 +189,7 @@ def scrape():
             print(title)
             title_validation = ""
             print(title_validation)
-            error_title = """Required meta tag [ title ] is missing. Please review your code."""
+            error_title = """The attribute for meta tag [ title ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_title)
 
         # Search description and custom format
@@ -209,7 +210,7 @@ def scrape():
             print(description)
             description_validation = ""
             print(description_validation)
-            error_description = """Required meta tag [ description ] is missing. Please review your code."""
+            error_description = """The attribute for meta tag [ description ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_description)
 
         # Search keywords
@@ -230,7 +231,7 @@ def scrape():
             print(keywords)
             keywords_validation = ""
             print(keywords_validation)
-            error_keywords = """Required meta tag [ keywords ] is missing. Please review your code."""
+            error_keywords = """The attribute for meta tag [ keywords ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_keywords)
 
         # Search scterms creator
@@ -253,7 +254,7 @@ def scrape():
                     else:
                         creator = ""
                         print(creator)
-                        error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
+                        error_creator = """The attribute for meta tag [ dcterms.creator ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
                         print(error_creator)
                         creator_validation = ""
                         print(creator_validation)
@@ -268,7 +269,7 @@ def scrape():
                     else:
                         creator = ""
                         print(creator)
-                        error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
+                        error_creator = """The attribute for meta tag [ dcterms.creator ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
                         print(error_creator)
                         creator_validation = ""
                         print(creator_validation)
@@ -277,7 +278,7 @@ def scrape():
             print(creator)
             creator_validation = ""
             print(creator_validation)
-            error_creator = """Required meta tag [ dcterms.creator ] is missing. Please review your code."""
+            error_creator = """The attribute for meta tag [ dcterms.creator ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_creator)
 
         # Searching the dcterms.title
@@ -297,7 +298,7 @@ def scrape():
             print(title2)
             title2_validation = ""
             print(title2_validation)
-            error_title2 = """Required meta tag [ dcterms.title ] is missing. Please review your code."""
+            error_title2 = """The attribute for meta tag [ dcterms.title ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_title2)
 
         # Finding date issued
@@ -325,7 +326,7 @@ def scrape():
             else:
                 date_issued = ""
                 print(date_issued)
-                error_dcterms_issued = """Meta tag value for [ dcterms.issued ] appears to be in wrong format. Date fields should be in the format yyyy-mm-dd (e.g. 2020-04-29)"""
+                error_dcterms_issued = """The attribute for meta tag [ dcterms.issued ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
                 print(error_dcterms_issued)
                 date_issued_validation = ""
                 print(date_issued_validation)
@@ -334,7 +335,7 @@ def scrape():
             print(date_issued)
             date_issued_validation = ""
             print(date_issued_validation)
-            error_dcterms_issued = """Required meta tag [ dcterms.issued ] is missing. Please review your code."""
+            error_dcterms_issued = """The attribute for meta tag [ dcterms.issued ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_dcterms_issued)
 
         # Finding the date modified
@@ -370,7 +371,7 @@ def scrape():
             date_modified = ""
             print(date_modified)
             date_modified_validation = ""
-            error_dcterms_modified = """Required meta tag [ dcterms.modified ] is missing. Please review your code."""
+            error_dcterms_modified = """The attribute for meta tag [ dcterms.modified ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_dcterms_modified)
 
         # Search for dcterms.subjects
@@ -390,7 +391,7 @@ def scrape():
             subject = ""
             print(subject)
             subject_validation = ""
-            error_dcterms_subject = """Required meta tag [ dcterms.subject ] is missing. Please review your code."""
+            error_dcterms_subject = """The attribute for meta tag [ dcterms.subject ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_dcterms_subject)
 
         # Search for the dcterms.language
@@ -433,14 +434,14 @@ def scrape():
                 else:
                     language = ""
                     print(language)
-                    error_dcterms_language = """Required meta tag [ dcterms.language ] is missing. Please review your code."""
+                    error_dcterms_language = """The attribute for meta tag [ dcterms.language ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
                     print(error_dcterms_language)
                     language_validation = ""
         else:
             language = ""
             print(language)
             language_validation = ""
-            error_dcterms_language = """Required meta tag [ dcterms.language ] is missing. Please review your code."""
+            error_dcterms_language = """The attribute for meta tag [ dcterms.language ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_dcterms_language)
 
         # find viewport
@@ -458,12 +459,12 @@ def scrape():
                 else:
                     viewport = ""
                     print(viewport)
-                    error_viewport = """Required meta tag [ viewport ] is missing. Please review your code."""
+                    error_viewport = """The attribute for meta tag [ viewport ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
                     print(error_viewport)
         else:
             viewport = ""
             print(viewport)
-            error_viewport = """Required meta tag [ viewport ] is missing. Please review your code."""
+            error_viewport = """The attribute for meta tag [ viewport ] appears to be incorrect. Please refer to the instructions or contact the Search Solutions Unit (SSU) for assistance."""
             print(error_viewport)
 
         # Searching for the url cononical
