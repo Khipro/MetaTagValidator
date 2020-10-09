@@ -401,7 +401,7 @@ def scrape():
                 formatter=SortAttributes())
             language_bite_remove = language_bite_remove.decode('utf8')
             language_original_eng = """<meta name="dcterms.language" title="ISO639-2" content="eng"/>"""
-            language_original_fra = """<meta name="dcterms.language" title="ISO639-2" content="fra" />"""
+            language_original_fra = """<meta name="dcterms.language" title="ISO639-2" content="fra"/>"""
             for tag in content1.find_all('meta', {'name': 'dcterms.language'}):
                 if lang == "English":
                     if str(language_bite_remove) == language_original_eng:
